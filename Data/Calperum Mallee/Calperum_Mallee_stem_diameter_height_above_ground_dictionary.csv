@@ -1,0 +1,26 @@
+﻿Dictionary,URL,Description
+siteId,http://linked.data.gov.au/def/tern-cv/889dfc31-5b1c-48c0-8bc7-e12f13d63891,Unique identifier for the site
+plotId,http://linked.data.gov.au/def/tern-cv/8cadf069-01d7-4420-b454-cae37740c2a2,Unique identifier for the plot
+plotLength_metres,http://linked.data.gov.au/def/tern-cv/9f8cc716-bc8c-40c4-be6b-6270813e94f3,Plot length (m)
+plotWidth_metres,http://linked.data.gov.au/def/tern-cv/c230dd97-3af1-43cf-bd27-ffcf4979d3a1,Plot width (m)
+latitude,http://linked.data.gov.au/def/tern-cv/aeb3149f-9354-4a0b-829a-acbaaa416a1f,The latitude of a location
+longitude,http://linked.data.gov.au/def/tern-cv/a685171d-2f9d-45b6-b870-1d918ea45148,The longitude of a location
+startVisitDate,http://linked.data.gov.au/def/tern-cv/ebe5f483-e279-4153-a6d9-2a0dd82e6ea2,The start date of the site visit.
+endVisitDate,http://linked.data.gov.au/def/tern-cv/02dde7af-0ec4-46b0-9c48-ffd26736ac9e,The end date of the site visit.
+phenomenonTime,http://www.w3.org/ns/sosa/phenomenonTime,"The time that the Result of an Observation, Actuation or Sampling applies to the FeatureOfInterest. Not necessarily the same as the resultTime. May be an Interval or an Instant, or some other compound TemporalEntity."
+transectId,http://linked.data.gov.au/def/tern-cv/de46fa49-d1c9-4bef-8462-d7ee5174e1e1,A line along which biotic and abiotic characteristics are sampled
+plantId,http://linked.data.gov.au/def/tern-cv/1c15747b-aec7-41e1-a490-c0b317ae441a,A unique identifier for an individual tree
+positionXCoordinates,http://linked.data.gov.au/def/tern-cv/0986ce8c-4a8c-4132-91f9-b7380d45ce73,"Position of an individual tree inside the plot, x coordinate"
+positionYCoordinates,http://linked.data.gov.au/def/tern-cv/87ed6ce4-3354-4a3f-ba15-2b7cb0caf3da,"Position of an individual tree inside the plot, y coordinate"
+family,https://w3id.org/tern/shapes/tern/Taxon-family,The full scientific name of the family in which the taxon is classified
+genus,https://w3id.org/tern/shapes/tern/Taxon-genus,The full scientific name of the genus in which the taxon is classified
+scientificName,https://w3id.org/tern/shapes/tern/Taxon-scientificName,The full scientific name of species
+fieldSpeciesName,http://linked.data.gov.au/def/tern-cv/04a4c009-2a51-4bdb-96dd-0bfd1bed8826,Species name determined during the process of field observation
+featureType,http://linked.data.gov.au/def/tern-cv/a3088b5c-622d-4e25-8a75-4c4961b0dfe8,The type of feature in which the observation is undertaken
+stemId,http://linked.data.gov.au/def/tern-cv/c6bd6ddd-77d8-4693-b528-67e8893dbeb7,A physical identifier for a stem that belongs to an individual plant.
+stemDiameter_centimetres,http://linked.data.gov.au/def/tern-cv/5701d307-bbea-415a-8857-fbf27d5b93ed,"Length from the outside of the bole, through the centre, to the opposite side (cm)"
+stemDiameterPointOfMeasurement_metres,http://linked.data.gov.au/def/tern-cv/3d64b224-02d5-48d4-bdf5-6caba81cfc64,Height at which the diameter of a bole or standing tree has been measured
+stemHeight_metres,http://linked.data.gov.au/def/tern-cv/c3111898-8404-4306-9599-e7866a749de7,"The height of an individual stem from the ground to the highest vegetative component (i.e. non-reproductive), belonging to an individual plant (m)"
+aboveGroundBiomass_kilograms,http://linked.data.gov.au/def/tern-cv/c3d26c6f-91b7-4627-91e6-2147fa44ad03,"All living organic matter above the soil, including stem, stump, branches, bark, seeds and foliage"
+stemStatus,http://linked.data.gov.au/def/tern-cv/43aab2ac-db60-4770-b9eb-3e64f177ae3b,Whether a stem belonging to an individual tree is alive or dead when censused.
+comment,http://linked.data.gov.au/def/tern-cv/5a13a61f-a43f-40cf-bc3f-3e0cc2e64ce1,"Notes on observation, not captured in a standard format"

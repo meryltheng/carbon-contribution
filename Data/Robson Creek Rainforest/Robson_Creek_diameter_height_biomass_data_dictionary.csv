@@ -1,0 +1,32 @@
+﻿Dictionary,URL,Description
+siteId,http://linked.data.gov.au/def/tern-cv/889dfc31-5b1c-48c0-8bc7-e12f13d63891,Unique identifier for the site
+plotId,http://linked.data.gov.au/def/tern-cv/8cadf069-01d7-4420-b454-cae37740c2a2,Unique identifier for the plot
+plotLength_metres,http://linked.data.gov.au/def/tern-cv/9f8cc716-bc8c-40c4-be6b-6270813e94f3,Plot length (m)
+plotWidth_metres,http://linked.data.gov.au/def/tern-cv/c230dd97-3af1-43cf-bd27-ffcf4979d3a1,Plot width (m)
+latitude,http://linked.data.gov.au/def/tern-cv/aeb3149f-9354-4a0b-829a-acbaaa416a1f,The latitude of a location
+longitude,http://linked.data.gov.au/def/tern-cv/a685171d-2f9d-45b6-b870-1d918ea45148,The longitude of a location
+subplotId,http://linked.data.gov.au/def/tern-cv/61311a0e-5b09-406c-9f64-b0637271ecf2,Unique identifier for a subplot
+subplotLength_metres,http://linked.data.gov.au/def/tern-cv/61311a0e-5b09-406c-9f64-b0637271ecf2,subplot length
+subplotWidth_metres,http://linked.data.gov.au/def/tern-cv/61311a0e-5b09-406c-9f64-b0637271ecf2,subplot width
+startVisitDate,http://linked.data.gov.au/def/tern-cv/ebe5f483-e279-4153-a6d9-2a0dd82e6ea2,The start date of the site visit.
+endVisitDate,http://linked.data.gov.au/def/tern-cv/02dde7af-0ec4-46b0-9c48-ffd26736ac9e,The end date of the site visit.
+phenomenonTime,http://www.w3.org/ns/sosa/phenomenonTime,"The time that the Result of an Observation, Actuation or Sampling applies to the FeatureOfInterest. Not necessarily the same as the resultTime. May be an Interval or an Instant, or some other compound TemporalEntity."
+featureType,http://linked.data.gov.au/def/tern-cv/a3088b5c-622d-4e25-8a75-4c4961b0dfe8,The type of feature in which the observation is undertaken
+plantId,http://linked.data.gov.au/def/tern-cv/1c15747b-aec7-41e1-a490-c0b317ae441a,A unique identifier for an individual plant
+positionXCoordinate,http://linked.data.gov.au/def/tern-cv/0986ce8c-4a8c-4132-91f9-b7380d45ce73,"Position of an individual tree inside the plot, x coordinate"
+positionYCoordinate,http://linked.data.gov.au/def/tern-cv/87ed6ce4-3354-4a3f-ba15-2b7cb0caf3da,"Position of an individual tree inside the plot, y coordinate"
+featureLongitude,http://linked.data.gov.au/def/tern-cv/1cd62624-08b7-447b-a473-660dde2991df,"The longitude of a location in which the observation of a feature of interest is undertaken. For example, plant ID# 51 is located at longitude -122.08585 (WGS 84)."
+featureLatitude,http://linked.data.gov.au/def/tern-cv/37e7ea86-75cf-4578-8147-07ee74dd52c0,"The latitude of a location in which the observation of a feature of interest is undertaken. For example, plant ID# 51 is located at latitude 37.42242 (WGS 84)."
+scientificName,https://w3id.org/tern/shapes/tern/Taxon-scientificName,The full scientific name of species
+genus,https://w3id.org/tern/shapes/tern/Taxon-genus,The full scientific name of the genus in which the taxon is classified
+family,https://w3id.org/tern/shapes/tern/Taxon-family,The full scientific name of the family in which the taxon is classified
+stemId,http://linked.data.gov.au/def/tern-cv/c6bd6ddd-77d8-4693-b528-67e8893dbeb7,A physical identifier for a stem that belongs to an individual plant.
+stemDiameter_centimetres,http://linked.data.gov.au/def/tern-cv/5701d307-bbea-415a-8857-fbf27d5b93ed,"Length from the outside of the bole, through the centre, to the opposite side"
+stemDiameterPointOfMeasurement_metres,http://linked.data.gov.au/def/tern-cv/3d64b224-02d5-48d4-bdf5-6caba81cfc64,Height at which the diameter of a bole or standing tree has been measured
+stemHeight_metres,http://linked.data.gov.au/def/tern-cv/c3111898-8404-4306-9599-e7866a749de7,"The height of an individual stem from the ground to the highest vegetative component (i.e. non-reproductive), belonging to an individual plant"
+woodDensity_gramsPerCubicCentimetres,http://linked.data.gov.au/def/tern-cv/1ff8df16-6ae7-48bf-85fb-de7c969fe93d,The ratio of the mass of a unit wood of the stem assessed after drying to its volume assessed without drying (g/cm3)
+aboveGroundBiomass_kilograms,http://linked.data.gov.au/def/tern-cv/30cc13de-339c-41a7-9bc0-717df5bb458d,"All living organic matter above the soil, including stem, stump, branches, bark, seeds and foliage"
+estimatedStemDiameterAtBreastHeight,http://linked.data.gov.au/def/tern-cv/893bb642-d19c-4474-aa7c-b46a476b2910,Estimated diameter of the main stem measured at 120 or 130 cm from the base
+treeAliveStatus,http://linked.data.gov.au/def/tern-cv/e3e69168-a959-4b8e-a1ea-2413fc3c2e4e,"Live trees condition when measured (e.g. normal, new recruit, burnt, snapped), dead trees are recorded but their condition is not described"
+diameterMeasurementInstrument,http://linked.data.gov.au/def/tern-cv/6226f002-84ff-457b-bd0c-712f131cf60a,Diameter measurement instrument
+comment,http://linked.data.gov.au/def/tern-cv/5a13a61f-a43f-40cf-bc3f-3e0cc2e64ce1,"Notes on observation, not captured in a standard format"

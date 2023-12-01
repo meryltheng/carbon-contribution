@@ -1,0 +1,26 @@
+Filename/Spreadsheet,Column,Meaning,Additional information
+All,datasetTitle,Datasource/Dataset to which this data row belongs to.,
+All,siteName,"Ecological site (Site, plot, quadrat or transect) where data was collected.",
+All,parentSiteName,Parent site where the ecological site belongs to.,
+All,latitude_Degree,"Latitude geographic coordinate of ecological site, in Decimal Degrees.",
+All,longitude_Degree,"Longitude geographic coordinate of ecological site, in Decimal Degrees.",
+All,siteVisitName,Identificator of the visit to the site when data was collected.,
+All,siteVisitStartDate,Starting date of the visit to the site.,
+All,siteVisitEndDate,Ending date of the visit to the site.,
+All,featureType,"Feature of interest type, i.e. observed feature like plant individual, plant specimen, landform, weather, etc.).",
+All,featureId,"Unique identifier of the feature, e.g. stem-1a, tree-1, bird-0123456, specimen-ABC123.",
+All,scientificName,Scientific Name of the species related to the feature of interest being observed.,
+vegetation-stratum,plotShape,Attribute of the site.,http://linked.data.gov.au/def/tern-cv/8080742b-6855-4e27-812b-671d4dfe7e0f
+vegetation-stratum,plotLength_Metre,Attribute of the site.,http://linked.data.gov.au/def/tern-cv/9f8cc716-bc8c-40c4-be6b-6270813e94f3
+vegetation-stratum,plotWidth_Metre,Attribute of the site.,http://linked.data.gov.au/def/tern-cv/c230dd97-3af1-43cf-bd27-ffcf4979d3a1
+vegetation-stratum,plotArea_SquareMetre,Attribute of the site.,http://linked.data.gov.au/def/tern-cv/cc229ff9-8cca-4ddd-8f01-e1e3fb5892af
+vegetation-stratum,stratumType,Attribute of the 'vegetation-stratum' feature of interest.,http://linked.data.gov.au/def/tern-cv/43ed01cc-0089-4a6b-8754-0990dd0f697b
+vegetation-stratum,mostDominantSpecies,Result of the 'most dominant species' observation,http://linked.data.gov.au/def/tern-cv/ea001a27-3217-45c2-a7b5-96a104986def
+vegetation-stratum,mostDominantSpeciesResultTime,When the observation was taken.,
+vegetation-stratum,mostDominantSpeciesMethod,Link to the vocabulary of the Method/Procedure followed for making the observation.,
+vegetation-stratum,secondMostDominantSpecies,Result of the 'second most dominant species' observation,http://linked.data.gov.au/def/tern-cv/d40b3e6d-db78-4031-b7f3-ed94d538a2af
+vegetation-stratum,secondMostDominantSpeciesResultTime,When the observation was taken.,
+vegetation-stratum,secondMostDominantSpeciesMethod,Link to the vocabulary of the Method/Procedure followed for making the observation.,
+vegetation-stratum,thirdMostDominantSpecies,Result of the 'third most dominant species' observation,http://linked.data.gov.au/def/tern-cv/07abcf97-542d-4c2f-9fb1-c7c7508f484c
+vegetation-stratum,thirdMostDominantSpeciesResultTime,When the observation was taken.,
+vegetation-stratum,thirdMostDominantSpeciesMethod,Link to the vocabulary of the Method/Procedure followed for making the observation.,
