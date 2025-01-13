@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+Data/.DS_Store
+Data/Spatial/climate/wc2.1*
