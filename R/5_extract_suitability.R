@@ -4,9 +4,9 @@ library(geodata)
 library(dismo)
 nvis<-rast('Data/Spatial/NVIS_MVG_RAS_AA.tif')
 
-bioclim<-worldclim_country('bio', country="AUS",res=0.5, path='Data/Spatial/')
-bioclim<-project(bioclim, crs(nvis))
-bioclim<-crop(bioclim,nvis)
+# bioclim<-worldclim_country('bio', country="AUS",res=0.5, path='Data/Spatial/')
+# bioclim<-project(bioclim, crs(nvis))
+# bioclim<-crop(bioclim,nvis)
 
 tmax<-worldclim_country('tmax',country="AUS",res=0.5, path='Data/Spatial/')
 tmax<-project(tmax, crs(nvis))
@@ -16,16 +16,18 @@ tmin<-worldclim_country('tmin',country="AUS",res=0.5, path='Data/Spatial/')
 tmin<-project(tmin, crs(nvis))
 tmin<-crop(tmin,nvis)
 
-prec<-worldclim_country('prec',country="AUS",res=0.5, path='Data/Spatial/')
-prec<-project(prec, crs(nvis))
-prec<-crop(prec,nvis)
-writeRaster(prec, 'Data/Spatial/prec.tif', overwrite=TRUE)
-  
-vapr<-worldclim_global(var="vapr",res=0.5, path='Data/Spatial/')
-vapr<-crop(vapr,project(nvis, crs(vapr)))
-vapr<-project(vapr, crs(nvis))
-writeRaster(vapr, 'Data/Spatial/vapr.tif', overwrite=TRUE)
+# prec<-worldclim_country('prec',country="AUS",res=0.5, path='Data/Spatial/')
+# prec<-project(prec, crs(nvis))
+# prec<-crop(prec,nvis)
+# writeRaster(prec, 'Data/Spatial/prec.tif', overwrite=TRUE)
+#   
+# vapr<-worldclim_global(var="vapr",res=0.5, path='Data/Spatial/')
+# vapr<-crop(vapr,project(nvis, crs(vapr)))
+# vapr<-project(vapr, crs(nvis))
+# writeRaster(vapr, 'Data/Spatial/vapr.tif', overwrite=TRUE)
 
+prec<-rast('Data/Spatial/prec.tif')
+vapr<-rast('Data/Spatial/vapr.tif')
 
 ## Stolen from BIOVARS package
 window <- function(x)  { 
@@ -54,6 +56,8 @@ prec<-as.matrix(prec)
 wet <- t(apply(prec, 1, window))
 #wettest quarter
 wetqrt <- cbind(1:nrow(prec), as.integer(apply(wet, 1, which.max)))
+
+
 #  Min Temperature of Wettest Quarter 
 tmpmin<-as.matrix(tmin)
 tmpmin <- t(apply(tmpmin, 1, window))/3 
@@ -69,23 +73,34 @@ writeRaster(bioclim, 'Data/Spatial/bioclim_newvars.tif', overwrite=TRUE)
 
 bioclim<-rast('Data/Spatial/bioclim_newvars.tif')
 
+##subset solar radiation to correct quarter
+
+solar<-rast('Data/Spatial/srad.tif')
+solar2<-resample(solar, bioclim)
+solar3<-as.matrix(solar2)
+bioclim$solar<-solar3[wetqrt]
+
+writeRaster(bioclim, 'Data/Spatial/bioclim_newvars2.tif', overwrite=TRUE)
+
+
+bioclim$vapr<-as.matrix(vapr)[wetqrt]
+
+writeRaster(bioclim, 'Data/Spatial/bioclim_newvars3.tif', overwrite=TRUE)
+
+rm(prec, vapr,solar, solar2, solar3, nvis, wet)
+gc()
+
 # Min  Min Temperature of Wettest Quarter 
 tmpmin2<-as.matrix(tmin)
 tmpminmin <- t(apply(tmpmin2, 1, window_min)) 
 tminminwet<- tmpminmin[wetqrt]
 bioclim$tminminwet<-tminminwet
+writeRaster(bioclim, 'Data/Spatial/bioclim_newvars4.tif', overwrite=TRUE)
+
 #Max Max Temperature of Wettest Quarter 
 tmpmax2<-as.matrix(tmax)
 tmpmaxmax <- t(apply(tmpmax2, 1, window_max))
 tmaxmaxwet<- tmpmaxmax[wetqrt]
 bioclim$tmaxmaxwet<-tmaxmaxwet
 
-writeRaster(bioclim, 'Data/Spatial/bioclim_newvars.tif', overwrite=TRUE)
-
-##subset solar radiation to correct quarter
-
-solar<-Rast('Data/Spatial/srad.tif')
-solar2<-resample(solar, bioclim)
-bioclim$solar<-solar2[wetqrt]
-
-writeRaster(bioclim, 'Data/Spatial/bioclim_newvars.tif', overwrite=TRUE)
+writeRaster(bioclim, 'Data/Spatial/bioclim_newvars5.tif', overwrite=TRUE)
