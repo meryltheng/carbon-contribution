@@ -195,7 +195,14 @@ def plotting(num_samples,threshold,max_it_number = 10, folder_path = os.path.joi
     plot_posterior_limited_samples(200, mean_post,"damage norm mean","Posterior of $\\mu$ - 200 random samples",[-5,2], folder_path, "mean")
     plot_posterior_limited_samples(500, mean_post,"damage norm mean","Posterior of $\\mu$ - 500 random samples",[-5,2], folder_path, "mean")
     plot_posterior_limited_samples(750, mean_post,"damage norm mean","Posterior of $\\mu$ - 750 random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(1000, mean_post,"damage norm mean","Posterior of $\\mu$ - 1000 random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(2000, mean_post,"damage norm mean","Posterior of $\\mu$ - 2000 random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(5000, mean_post,"damage norm mean","Posterior of $\\mu$ - 5000 random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(7500, mean_post,"damage norm mean","Posterior of $\\mu$ - 7500 random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(10000, mean_post,"damage norm mean","Posterior of $\\mu$ - 10k random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(12000, mean_post,"damage norm mean","Posterior of $\\mu$ - 12k random samples",[-5,2], folder_path, "mean")
+    plot_posterior_limited_samples(15000, mean_post,"damage norm mean","Posterior of $\\mu$ - 15k random samples",[-5,2], folder_path, "mean")
 
 
 if __name__ == "__main__":
-    plotting(num_samples=10,threshold=0.7,max_it_number = 200)
+    plotting(num_samples=10,threshold=0.7,max_it_number = 2000)

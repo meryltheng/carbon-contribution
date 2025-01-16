@@ -49,13 +49,14 @@ def damage_sample(row):
 
 num_samples=10
 threshold=0.7
-max_it_number = 20
+max_it_number = 2000
+
 
 theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold,max_it_number)
 
 folder_path = os.path.join(os.path.dirname(__file__))
 
-num_damage_samples = 10
+num_damage_samples = 1000
 
 for i in range(1,num_damage_samples+1):
 

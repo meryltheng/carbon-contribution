@@ -1,0 +1,206 @@
+Species,Genus,Damage
+,Acacia,0.0
+acmena smithii,Acmena,0.0323
+acmena smithii,Acmena,0.1333
+acmena smithii,Acmena,0.21
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9385
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9755
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9143
+baeckea linifolia,Baeckea,0.11
+Corymbia maculata,Corymbia,0.0
+decaspermum humile,Decaspermum,0.3333
+decaspermum humile,Decaspermum,1.0
+decaspermum humile,Decaspermum,1.0
+Eugenia reinwardtiana,Eugenia,0.5
+eugenia koolauensis,Eugenia,0.7
+Eucalyptus grandis x Eucalyptus urophylla clone ,Eucalyptus,0.89
+Eucalyptus grandis x Eucalyptus urophylla clone ,Eucalyptus,0.34
+Eucalyptus grandis ,Eucalyptus,0.23
+E. globulus,Eucalyptus,0.0
+gossia hillii,Gossia,1.0
+gossia hillii,Gossia,0.9687
+gossia hillii,Gossia,1.0
+Leptospermum laevigatum,Leptospermum,0.24
+Lophostemon confertus,Lophostemon,0.0
+Melaleuca quinquenervia,Melaleuca,0.45
+Melaleuca squarrosa,Melaleuca,0.0
+Metrosideros polymorpha,Metrosideros,0.08
+rhodamnia maideniana,Rhodamnia,1.0
+rhodamnia maideniana,Rhodamnia,0.9342
+rhodamnia rubescens,Rhodamnia,0.12
+rhodamnia rubescens,Rhodamnia,0.53
+rhodomyrtus psidioides,Rhodomyrtus,0.57
+Agonis flexuosa,Agonis,0.7880572338782537
+Asteromyrtus brassii,Asteromyrtus,0.1861836264920007
+Austromyrtus dulcis,Austromyrtus,0.04414585218105782
+Austromyrtus tenuifolia,Austromyrtus,0.03386432137809159
+Backhousia angustifolia,Backhousia,0.11644805426766114
+Backhousia bancroftii,Backhousia,0.06433343190024043
+Backhousia citriodora,Backhousia,0.2732528579713154
+Backhousia enata,Backhousia,0.0768560498894797
+Backhousia gundarara,Backhousia,0.01918294338099802
+Backhousia hughesii,Backhousia,0.27525645997900217
+Backhousia leptopetala,Backhousia,0.27957898605928877
+Backhousia myrtifolia,Backhousia,0.12473748758825676
+Backhousia oligantha,Backhousia,0.27236899127624525
+Backhousia sciadophora,Backhousia,0.13339424311127268
+Backhousia subargentea,Backhousia,0.14586712192808804
+Callistemon formosus,Callistemon,0.08060325293789505
+Callistemon pachyphyllus,Callistemon,0.08990468450629918
+Callistemon polandii,Callistemon,0.5361155621353364
+Callistemon salignus,Callistemon,0.03309675204614648
+Callistemon sieberi,Callistemon,0.5070946782787535
+Callistemon viminalis,Callistemon,0.3624566657190005
+Chamelaucium uncinatum,Chamelaucium,0.6759911559195586
+Corymbia ficifolia x C. ptychocarpa,Corymbia,0.048421226445020116
+Corymbia henryi,Corymbia,0.09998797890896016
+Corymbia torelliana,Corymbia,0.12516913714039224
+Darwinia citriodora,Darwinia,0.21821455498857878
+Decaspermum humile,Decaspermum,0.0012215241407338429
+Eucalyptus carnea,Eucalyptus,0.08228513927721592
+Eucalyptus cloeziana,Eucalyptus,0.023718865196377115
+Eucalyptus curtisii,Eucalyptus,0.05749417219426678
+Eucalyptus planchoniana,Eucalyptus,0.3045920070141168
+Eucalyptus tereticornis,Eucalyptus,0.02513847162935967
+Eucalyptus tindaliae,Eucalyptus,0.27954335065112534
+Eugenia natalitia,Eugenia,0.24345019251990752
+Eugenia uniflora,Eugenia,0.3308899521629407
+Eugenia zeyheri,Eugenia,0.2242448659238745
+Gossia bamagensis,Gossia,0.10819799082853399
+Gossia bidwillii,Gossia,0.15240027529882716
+Gossia floribunda,Gossia,0.04153638591152253
+Gossia lewisensis,Gossia,0.23164616781087277
+Gossia macilwraithensis,Gossia,0.20723512861246918
+Gossia myrsinocarpa,Gossia,0.29049431130199954
+Gossia punctata,Gossia,0.22125951804072996
+Gossia acmenoides,Gossia,0.3980703069358895
+Gossia fragrantissima,Gossia,0.3047222708247368
+Gossia gonoclada,Gossia,0.38867486323963263
+Gossia inophloia,Gossia,0.6534741957854118
+"Homoranthus
+melanostictus",Homoranthus,0.21342470559470073
+Homoranthus virgatus,Homoranthus,0.2839951612326683
+Lenwebbia lasioclada,Lenwebbia,0.05080490763999279
+Lenwebbia sp. Main Range (P.R.Sharpe+ 4877),Lenwebbia,0.6118998508873472
+Leptospermum liversidgei,Leptospermum,0.30906194445567303
+Leptospermum madidum,Leptospermum,0.20863438006775792
+Leptospermum petersonii,Leptospermum,0.03142338075243445
+Leptospermum semibaccatum,Leptospermum,0.01503649233432558
+Lindsayomyrtus racemoides,Lindsayomyrtus,0.01868890137913004
+Lithomyrtus obtusa,Lithomyrtus,0.005731786581173903
+Lophostemon suaveolens,Lophostemon,0.05056148441708008
+Melaleuca cheelii,Melaleuca,0.015728447100569865
+Melaleuca comboynensis,Melaleuca,0.0968629355123829
+Melaleuca fluviatilis,Melaleuca,0.4219947624409772
+Melaleuca leucadendra,Melaleuca,0.056606494669535046
+Melaleuca linariifolia,Melaleuca,0.0946306650659805
+Melaleuca nervosa,Melaleuca,0.41119793319639375
+Melaleuca nesophila,Melaleuca,0.00021882564850628228
+Melaleuca nodosa,Melaleuca,0.3397494926583755
+Melaleuca saligna,Melaleuca,0.2336209721291196
+Melaleuca viridiflora,Melaleuca,0.4452986085431394
+Metrosideros collina,Metrosideros,0.1487577771738644
+"Metrosideros collina x
+villosa",Metrosideros,0.007768919634404181
+"Metrosideros
+kermadecensis",Metrosideros,0.024550163144096304
+Metrosideros thomasii,Metrosideros,0.10608854858169847
+Myrciaria cauliflora,Myrciaria,0.033910214851782916
+Myrtus communis,Myrtus,0.5463631050480484
+Neofabricia myrtifolia,Neofabricia,0.31604755140203933
+Osbornia octodonta,Osbornia,0.004072937857471759
+Pilidiostigma glabrum,Pilidiostigma,0.3234475960067853
+Pilidiostigma rhytispermum,Pilidiostigma,0.19432004651491663
+Pilidiostigma tetramerum,Pilidiostigma,0.24610741276537285
+Rhodamnia acuminata,Rhodamnia,0.051454772070499866
+Rhodamnia arenaria,Rhodamnia,0.31150462860524475
+Rhodamnia argentea,Rhodamnia,0.27825067750826293
+Rhodamnia australis,Rhodamnia,0.41648004574679454
+Rhodamnia blairiana,Rhodamnia,0.09000632436111311
+Rhodamnia costata,Rhodamnia,0.1364736940205109
+Rhodamnia dumicola,Rhodamnia,0.5654646377846893
+Rhodamnia sessiliflora,Rhodamnia,0.9963979606493407
+Rhodamnia spongiosa,Rhodamnia,0.49510284954736083
+Homoranthus papillatus,Homoranthus,0.2471239231425344
+Hypocalymma angustifolium ,Hypocalymma,0.13498921144193043
+Lenwebbia prominens,Lenwebbia,0.34282284517002815
+Lenwebbia sp. Blackall Range,Lenwebbia,0.12866453354375817
+Leptospermum barneyense,Leptospermum,0.10233449446063614
+Leptospermum luehmannii,Leptospermum,0.11208029365224337
+Leptospermum trinervium,Leptospermum,0.2315067360105234
+Mitrantia bilocularis,Mitrantia,0.29774244712417963
+Rhodamnia angustifolia,Rhodamnia,0.7548312118887772
+Rhodamnia glabrescens,Rhodamnia,0.21582328040808907
+Rhodamnia pauciovulata,Rhodamnia,0.23319291705785927
+Rhodamnia rubescens,Rhodamnia,0.678830818252316
+Rhodomyrtus canescens,Rhodomyrtus,0.4198710699981065
+Rhodomyrtus effusa,Rhodomyrtus,0.33726974228075934
+Rhodomyrtus macrocarpa,Rhodomyrtus,0.2117551358772709
+Rhodomyrtus pervagata,Rhodomyrtus,0.33131112234883475
+Rhodomyrtus sericea,Rhodomyrtus,0.2193571462415771
+Rhodomyrtus tomentosa,Rhodomyrtus,0.2314332167353419
+Rhodomyrtus trineura,Rhodomyrtus,0.3335432614478919
+Ristantia waterhousei,Ristantia,0.1241453949789797
+Ristantia pachysperma,Ristantia,0.35608810174773264
+Sphaerantia discolor,Sphaerantia,0.21866814514240063
+Stockwellia quadrifida,Stockwellia,0.440731433770744
+Syzygium angophoroides,Syzygium,0.25907922969741515
+Syzygium anisatum,Syzygium,0.054155125187135944
+Syzygium apodophyllum,Syzygium,0.12186246008476553
+Syzygium argyropedicum,Syzygium,0.02021363965642964
+Syzygium armstrongii,Syzygium,0.12706453019697173
+Syzygium australe,Syzygium,0.011084367904223846
+Syzygium bamagense,Syzygium,0.2536586753252199
+Syzygium banksii,Syzygium,0.25059675555401384
+Syzygium boonjee,Syzygium,0.16454520370339343
+Syzygium canicortex,Syzygium,0.01705860652208213
+Syzygium claviflorum,Syzygium,0.33741886475993943
+Syzygium cormiflorum,Syzygium,0.040381751090810436
+Syzygium corynanthum,Syzygium,0.05427165852929505
+Syzygium cryptophlebium,Syzygium,0.2844001687811739
+Syzygium cumini,Syzygium,0.22508294396850714
+Syzygium dansiei,Syzygium,0.12664112965593288
+Syzygium endophloium,Syzygium,0.0009240991264918286
+Syzygium erythrocalyx,Syzygium,0.056257093898759436
+Syzygium eucalyptoides,Syzygium,0.5303138882958409
+Syzygium eucalyptoide,Syzygium,0.3115920297418393
+Syzygium floribundum,Syzygium,0.0020637613056757598
+Syzygium forte,Syzygium,0.2009832532884941
+Syzygium forte ,Syzygium,0.009890109610264819
+Syzygium hedraiophyllum,Syzygium,0.05885122767619411
+Syzygium hemilamprum,Syzygium,0.02291966386994604
+Syzygium ingens,Syzygium,0.03449934197704918
+Syzygium jambos,Syzygium,0.974311404919366
+Syzygium kuranda,Syzygium,0.3013811050419084
+Syzygium luehmannii,Syzygium,0.2685740119456981
+Syzygium maraca,Syzygium,0.040984690083908815
+Syzygium minutiflorum,Syzygium,0.033954300096574075
+Syzygium nervosum,Syzygium,0.4670050360322491
+Syzygium oleosum,Syzygium,0.0010658883419425447
+"Syzygium
+pseudofastigiatum",Syzygium,0.06376822626174805
+Syzygium puberulum,Syzygium,0.24948883241630493
+Syzygium suborbiculare,Syzygium,0.30777276697582234
+Syzygium tierneyanum,Syzygium,0.10547813613866874
+Syzygium unipunctatum,Syzygium,0.21479196101349673
+Syzygium wilsonii ,Syzygium,0.08581290692871879
+Syzygium wilsonii x luehmannii,Syzygium,0.1544969617479115
+Syzygium xerampelinum,Syzygium,0.2572312559927452
+Syzygium aqueum,Syzygium,0.19124827500720554
+Syzygium hodgkinsoniae,Syzygium,0.24235330678668165
+Syzygium macilwraithianum,Syzygium,0.18878823388723887
+Syzygium moorei,Syzygium,0.04594839327874323
+Syzygium mulgraveanum,Syzygium,0.0012917148309361526
+Syzygium paniculatum,Syzygium,0.14037918161663065
+Syzygium rubrimolle,Syzygium,0.17242072848033163
+Thryptomene saxicola,Thryptomene,0.09246132708575527
+Tristania neriifolia,Tristania,0.27186843855879195
+Tristaniopsis exiliflora,Tristaniopsis,0.4151345812295799
+Tristaniopsis laurina,Tristaniopsis,0.09780302486857928
+Uromyrtus metrosideros,Uromyrtus,0.20807365363349262
+Uromyrtus tenella,Uromyrtus,0.02698996791828967
+Xanthostemon chrysanthus,Xanthostemon,0.2603184137937844
+Xanthostemon fruticosus,Xanthostemon,0.3446502814971488
+Xanthostemon youngii,Xanthostemon,0.21697260892186532
+"Xanthostemon
+oppositifolius",Xanthostemon,0.4176872045840654
