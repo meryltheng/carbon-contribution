@@ -71,7 +71,7 @@ tmaxwet<- tmpmax[wetqrt]
 bioclim$tmaxwet<-tmaxwet
 writeRaster(bioclim, 'Data/Spatial/bioclim_newvars.tif', overwrite=TRUE)
 
-bioclim<-rast('Data/Spatial/bioclim_newvars.tif')
+bioclim<-rast('Data/Spatial/bioclim_newvars3.tif')
 
 ##subset solar radiation to correct quarter
 
@@ -96,6 +96,7 @@ tmpminmin <- t(apply(tmpmin2, 1, window_min))
 tminminwet<- tmpminmin[wetqrt]
 bioclim$tminminwet<-tminminwet
 writeRaster(bioclim, 'Data/Spatial/bioclim_newvars4.tif', overwrite=TRUE)
+gc()
 
 #Max Max Temperature of Wettest Quarter 
 tmpmax2<-as.matrix(tmax)
