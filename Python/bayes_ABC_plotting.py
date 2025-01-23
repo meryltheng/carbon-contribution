@@ -2,13 +2,13 @@ from bayes_ABC import *
 import matplotlib
 import random
 
-def combine_data(num_samples,threshold,max_it_number):
+def combine_data(num_samples,threshold_known, threshold_freq,max_it_number):
 
     folder_path = os.path.join(os.path.dirname(__file__))
     df_list = []
 
     for it_num in range(0,max_it_number+1):
-        csv_file_name = os.path.join(folder_path, "bayes_samples", f"bayes_posteriors_thres{threshold}_num{num_samples}_{it_num}.csv")
+        csv_file_name = os.path.join(folder_path, "bayes_samples", f"bayes_posteriors_thres{threshold_known}_{threshold_freq}_num{num_samples}_{it_num}.csv")
 
         if os.path.isfile(csv_file_name):
             output = pd.read_csv(csv_file_name)
@@ -168,16 +168,16 @@ def plot_posterior_limited_samples(num_samples_included, posterior,x_label,plot_
     plt.savefig( os.path.join(folder_path , "figures", f"bayes_posterior_{param_name}_{num_samples_included}.png"), bbox_inches='tight')
 
 
-def plotting(num_samples,threshold,max_it_number = 10, folder_path = os.path.join(os.path.dirname(__file__))):
+def plotting(num_samples,threshold_known,threshold_freq,max_it_number = 10, folder_path = os.path.join(os.path.dirname(__file__))):
 
-    theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold,max_it_number)
+    theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold_known, threshold_freq,max_it_number)
 
     plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder_path)
 
     plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
 
-    # for index in [0,10,20,30,40,50]:  # TODO: a proper random choice
-    #     plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path )
+    for index in  [0,10,20,30,40,50]:  #  range(0,10): #  TODO: a proper random choice
+        plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path )
 
     plot_posterior_across_included_samples(theta_RT_post,"RT threshold","Posterior of $\\theta_{RT}$ threshold",[0,1], folder_path, "thresholdRT")
 
@@ -205,4 +205,4 @@ def plotting(num_samples,threshold,max_it_number = 10, folder_path = os.path.joi
 
 
 if __name__ == "__main__":
-    plotting(num_samples=10,threshold=0.7,max_it_number = 2000)
+    plotting(num_samples=10,threshold_known=0.5, threshold_freq=0.1,max_it_number = 2000)

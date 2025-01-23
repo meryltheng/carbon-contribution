@@ -1,35 +1,36 @@
 Species,Genus,Damage,Rating,Notes,Reference
 ,Acacia,0,,"seems to be zero, by the fact that it just never appears in susceptibility tables; in this report about acacia https://www.agriculture.gov.au/sites/default/files/documents/environmental-risk-mitigation-plan-acacia.pdf several other pathogens were mentioned to affect Acacia, and myrtle rust was mentioned as an example of biological invasion but not as a pathogen of risk to acacia; also doesn't appear on the list here https://www.business.qld.gov.au/industries/farms-fishing-forestry/agriculture/biosecurity/plants/priority-pest-disease/myrtle-rust",
-acmena smithii,Acmena,0.0323,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-acmena smithii,Acmena,0.1333,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-acmena smithii,Acmena,0.21,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-archirhodomyrtus beckleri,Archirhodomyrtus,0.9385,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-archirhodomyrtus beckleri,Archirhodomyrtus,0.9755,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-archirhodomyrtus beckleri,Archirhodomyrtus,0.9143,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-baeckea linifolia,Baeckea,0.11,,11% leaf number reduction,mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
+Syzygium smithii,Syzygium,0.0323,RT-MS,branch dieback; previously known as acmena smithii,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+Syzygium smithii,Syzygium,0.1333,RT-MS,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+Syzygium smithii,Syzygium,0.21,RT-MS,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9385,HS,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9755,HS,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+archirhodomyrtus beckleri,Archirhodomyrtus,0.9143,HS,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+baeckea linifolia,Baeckea,0.11,MS,11% leaf number reduction,mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
+Corymbia citriodora,corymbia,0.121212121,RT,approximately 0.33  to 0.29 cm per day growth rate reduction from control to resistant,https://www.sciencedirect.com/science/article/pii/S0926669020302041#bib0045
 Corymbia maculata,Corymbia,0,,not susceptible,https://link.springer.com/article/10.1007/s13313-011-0082-6/tables/1
-decaspermum humile,Decaspermum,0.3333,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-decaspermum humile,Decaspermum,1,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-decaspermum humile,Decaspermum,1,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-Eugenia reinwardtiana,Eugenia,0.5,,50% defoliation,mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
+decaspermum humile,Decaspermum,0.3333,ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+decaspermum humile,Decaspermum,1,ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+decaspermum humile,Decaspermum,1,ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+Eugenia reinwardtiana,Eugenia,0.5,ES,50% defoliation,mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
 eugenia koolauensis,Eugenia,0.7,,Hawaii,mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf  -- should check for proper citation
 Eucalyptus grandis x Eucalyptus urophylla clone ,Eucalyptus,0.89,,"growth: the preventive rust treatment provided a higher average MAI (32 m_ ha_1 year_1), 89%, in relation to the control plot",https://onlinelibrary.wiley.com/doi/full/10.1111/efp.12736
 Eucalyptus grandis x Eucalyptus urophylla clone ,Eucalyptus,0.34,,"growth: At 5 years of age, the preventive treatment increased the average annual growth (47 m_ ha_1 year_1) by 23% and 34% when compared to the curative treatment (38 m_ ha_1 year_1) and the control plot (35 m_ ha_1 year_1)",https://onlinelibrary.wiley.com/doi/full/10.1111/efp.12736
-Eucalyptus grandis ,Eucalyptus,0.23,,wood volume losses,https://www.sciencedirect.com/science/article/pii/S0378112719321759?via%3Dihub
+Eucalyptus grandis ,Eucalyptus,0.23,RT-MS,wood volume losses,https://www.sciencedirect.com/science/article/pii/S0378112719321759?via%3Dihub
 E. globulus,Eucalyptus,0,,not susceptible,https://link.springer.com/article/10.1007/s13313-011-0082-6/tables/1
-gossia hillii,Gossia,1,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-gossia hillii,Gossia,0.9687,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-gossia hillii,Gossia,1,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+gossia hillii,Gossia,1,HS-ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+gossia hillii,Gossia,0.9687,HS-ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+gossia hillii,Gossia,1,HS-ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
 Leptospermum laevigatum,Leptospermum,0.24,,height reduction in seedlings? ,Mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
 Lophostemon confertus,Lophostemon,0,,not susceptible,Table 2 https://www.nzffa.org.nz/images/design/guava-rust.pdf
-Melaleuca quinquenervia,Melaleuca,0.45,,"45% reduction in biomass when infected, ",mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
+Melaleuca quinquenervia,Melaleuca,0.45,RT-MS-HS-ES,"45% reduction in biomass when infected, ",mentioned in https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf
 Melaleuca squarrosa,Melaleuca,0,,not susceptible,Table 2 https://www.nzffa.org.nz/images/design/guava-rust.pdf
-Metrosideros polymorpha,Metrosideros,0.08,,"8–10% mortality rate for over 17,000 ‘_hi‘a seedlings and young saplings, even with a monthly treatment of Puccinia-specific fungicide",https://www.sciencedirect.com/science/article/pii/S1462901112000433
-rhodamnia maideniana,Rhodamnia,1,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-rhodamnia maideniana,Rhodamnia,0.9342,,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
-rhodamnia rubescens,Rhodamnia,0.12,,mean adult mortality across different sites,https://link.springer.com/article/10.1007/s10530-015-0996-y/tables/2
-rhodamnia rubescens,Rhodamnia,0.53,,"tree death  (""53 % of trees had died by October 2014"")",https://link.springer.com/article/10.1007/s10530-015-0996-y
-rhodomyrtus psidioides,Rhodomyrtus,0.57,,mean tree mortality across different sites,https://link.springer.com/article/10.1007/s10530-015-0996-y
+Metrosideros polymorpha,Metrosideros,0.08,,"8-10% mortality rate for over 17,000 ‘_hi‘a seedlings and young saplings, even with a monthly treatment of Puccinia-specific fungicide",https://www.sciencedirect.com/science/article/pii/S1462901112000433
+rhodamnia maideniana,Rhodamnia,1,ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+rhodamnia maideniana,Rhodamnia,0.9342,ES,branch dieback,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188058
+rhodamnia rubescens,Rhodamnia,0.12,HS-ES,mean adult mortality across different sites,https://link.springer.com/article/10.1007/s10530-015-0996-y/tables/2
+rhodamnia rubescens,Rhodamnia,0.53,HS-ES,"tree death  (""53 % of trees had died by October 2014"")",https://link.springer.com/article/10.1007/s10530-015-0996-y
+rhodomyrtus psidioides,Rhodomyrtus,0.57,ES,mean tree mortality across different sites,https://link.springer.com/article/10.1007/s10530-015-0996-y
 Agonis flexuosa,Agonis,,ES,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Asteromyrtus brassii,Asteromyrtus,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Austromyrtus dulcis,Austromyrtus,,RT-MS-HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
@@ -77,8 +78,7 @@ Gossia acmenoides,Gossia,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019
 Gossia fragrantissima,Gossia,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Gossia gonoclada,Gossia,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Gossia inophloia,Gossia,,ES,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-"Homoranthus
-melanostictus",Homoranthus,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
+Homoranthus melanostictus,Homoranthus,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Homoranthus virgatus,Homoranthus,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Lenwebbia lasioclada,Lenwebbia,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Lenwebbia sp. Main Range (P.R.Sharpe+ 4877),Lenwebbia,,ES,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
@@ -100,10 +100,8 @@ Melaleuca nodosa,Melaleuca,,HS-ES,mapping,https://anpc.asn.au/wp-content/uploads
 Melaleuca saligna,Melaleuca,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Melaleuca viridiflora,Melaleuca,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Metrosideros collina,Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-"Metrosideros collina x
-villosa",Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-"Metrosideros
-kermadecensis",Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
+Metrosideros collina x villosa,Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
+Metrosideros kermadecensis,Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Metrosideros thomasii,Metrosideros,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Myrciaria cauliflora,Myrciaria,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Myrtus communis,Myrtus,,MS-HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
@@ -132,7 +130,6 @@ Mitrantia bilocularis,Mitrantia,,MS,mapping,https://anpc.asn.au/wp-content/uploa
 Rhodamnia angustifolia,Rhodamnia,,ES,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Rhodamnia glabrescens,Rhodamnia,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Rhodamnia pauciovulata,Rhodamnia,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-Rhodamnia rubescens,Rhodamnia,,HS-ES,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Rhodomyrtus canescens,Rhodomyrtus,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Rhodomyrtus effusa,Rhodomyrtus,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Rhodomyrtus macrocarpa,Rhodomyrtus,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
@@ -177,8 +174,7 @@ Syzygium maraca,Syzygium,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019
 Syzygium minutiflorum,Syzygium,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Syzygium nervosum,Syzygium,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Syzygium oleosum,Syzygium,,RT-MS-HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-"Syzygium
-pseudofastigiatum",Syzygium,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
+Syzygium pseudofastigiatum,Syzygium,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Syzygium puberulum,Syzygium,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Syzygium suborbiculare,Syzygium,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Syzygium tierneyanum,Syzygium,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
@@ -202,5 +198,4 @@ Uromyrtus tenella,Uromyrtus,,RT,mapping,https://anpc.asn.au/wp-content/uploads/2
 Xanthostemon chrysanthus,Xanthostemon,,RT-MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Xanthostemon fruticosus,Xanthostemon,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
 Xanthostemon youngii,Xanthostemon,,MS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
-"Xanthostemon
-oppositifolius",Xanthostemon,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3
+Xanthostemon oppositifolius,Xanthostemon,,HS,mapping,https://anpc.asn.au/wp-content/uploads/2019/02/Myrtle_Rust_reviewed_June_22_2018_web_ALL.pdf Appendix 3

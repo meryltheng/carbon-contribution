@@ -48,11 +48,12 @@ def damage_sample(row):
 
 
 num_samples=10
-threshold=0.7
+threshold_known=0.5
+threshold_freq=0.1
 max_it_number = 2000
 
 
-theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold,max_it_number)
+theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold_known,threshold_freq,max_it_number)
 
 folder_path = os.path.join(os.path.dirname(__file__))
 

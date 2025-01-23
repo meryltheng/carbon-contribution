@@ -1,6 +1,8 @@
 ﻿Species,Numerical Rating,Damage,Rating
 Agonis flexuosa,3,,ES
-Archirhodomyrtus beckleri ,2,0.942766667,HS
+Archirhodomyrtus beckleri ,2,0.9385,HS
+Archirhodomyrtus beckleri ,2,0.9755,HS
+Archirhodomyrtus beckleri ,2,0.9143,HS
 Asteromyrtus brassii,0,,RT
 Austromyrtus dulcis,1,,RT-MS-HS
 Austromyrtus tenuifolia,0,,RT
@@ -28,7 +30,9 @@ Corymbia ficifolia x C. ptychocarpa,0,,RT
 Corymbia henryi,0,,RT
 Corymbia torelliana,0,,RT
 Darwinia citriodora,1,,MS
-Decaspermum humile,3,0.777766667,ES
+Decaspermum humile,3,0.3333,ES
+Decaspermum humile,3,1,ES
+Decaspermum humile,3,1,ES
 Decaspermum humile,0,,RT
 Eucalyptus carnea,1,,RT-MS-HS
 Eucalyptus cloeziana,0,,RT
@@ -44,7 +48,9 @@ Eugenia zeyheri,1,,MS
 Gossia bamagensis,0,,RT
 Gossia bidwillii,0,,RT
 Gossia floribunda,0,,RT
-Gossia hillii,2.5,0.989566667,HS-ES
+Gossia hillii,2.5,1,HS-ES
+Gossia hillii,2.5,0.9687,HS-ES
+Gossia hillii,2.5,1,HS-ES
 Gossia lewisensis,1.5,,MS-HS
 Gossia macilwraithensis,1,,MS
 Gossia myrsinocarpa,1.5,,MS-HS
@@ -53,8 +59,7 @@ Gossia acmenoides,2,,HS
 Gossia fragrantissima,1,,MS
 Gossia gonoclada,2,,HS
 Gossia inophloia,3,,ES
-"Homoranthus
-melanostictus",1,,MS
+Homoranthus melanostictus,1,,MS
 Homoranthus virgatus,1,,MS
 Lenwebbia lasioclada,0,,RT
 Lenwebbia sp. Main Range (P.R.Sharpe+ 4877),3,,ES
@@ -77,10 +82,8 @@ Melaleuca quinquenervia,1.5,0.45,RT-MS-HS-ES
 Melaleuca saligna,1,,MS
 Melaleuca viridiflora,2,,HS
 Metrosideros collina,0,,RT
-"Metrosideros collina x
-villosa",0,,RT
-"Metrosideros
-kermadecensis",0,,RT
+Metrosideros collina x villosa,0,,RT
+Metrosideros kermadecensis,0,,RT
 Metrosideros thomasii,0,,RT
 Myrciaria cauliflora,0,,RT
 Myrtus communis,1.5,,MS-HS
@@ -96,7 +99,8 @@ Rhodamnia australis,2,,HS
 Rhodamnia blairiana,0.5,,RT-MS
 Rhodamnia costata,1,,RT-MS-HS
 Rhodamnia dumicola,2,,HS
-Rhodamnia maideniana,3,0.9671,ES
+Rhodamnia maideniana,3,1,ES
+Rhodamnia maideniana,3,0.9342,ES
 Rhodamnia sessiliflora,2,,MS-HS-ES
 Rhodamnia spongiosa,2,,HS
 Homoranthus papillatus,1,,MS
@@ -110,7 +114,8 @@ Mitrantia bilocularis,1,,MS
 Rhodamnia angustifolia,3,,ES
 Rhodamnia glabrescens,1,,MS
 Rhodamnia pauciovulata,1,,MS
-Rhodamnia rubescens,2.5,,HS-ES
+Rhodamnia rubescens,2.5,0.12,HS-ES
+Rhodamnia rubescens,2.5,0.53,HS-ES
 Rhodomyrtus canescens,2,,HS
 Rhodomyrtus effusa,1,,MS
 Rhodomyrtus macrocarpa,1,,MS
@@ -156,10 +161,11 @@ Syzygium maraca,0,,RT
 Syzygium minutiflorum,0,,RT
 Syzygium nervosum,2,,HS
 Syzygium oleosum,1,,RT-MS-HS
-"Syzygium
-pseudofastigiatum",0,,RT
+Syzygium pseudofastigiatum,0,,RT
 Syzygium puberulum,1,,MS
-Syzygium smithii,0.5,0.1252,RT-MS
+Syzygium smithii,0.5,0.0323,RT-MS
+Syzygium smithii,0.5,0.1333,RT-MS
+Syzygium smithii,0.5,0.21,RT-MS
 Syzygium suborbiculare,1,,MS
 Syzygium tierneyanum,0,,RT
 Syzygium unipunctatum,0.5,,RT-MS
@@ -182,5 +188,4 @@ Uromyrtus tenella,0,,RT
 Xanthostemon chrysanthus,0.5,,RT-MS
 Xanthostemon fruticosus,2,,HS
 Xanthostemon youngii,1,,MS
-"Xanthostemon
-oppositifolius",2,,HS
+Xanthostemon oppositifolius,2,,HS

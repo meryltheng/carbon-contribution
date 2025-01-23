@@ -13,6 +13,9 @@ import pickle
 import csv
 import argparse
 
+# import warnings
+# warnings.filterwarnings("error")
+
 def simulated_score_given_damage(damage,theta_RT, theta_MS, theta_HS):
     if damage< theta_RT:
         return "RT"
@@ -40,6 +43,21 @@ def truncated_norm_pdf(x, mean, sd, lower=0,upper=1):
     scale = sd
     a, b = (a_trunc - loc) / scale, (b_trunc - loc) / scale # the way a,b are defined by scipy
     return truncnorm.pdf(x, a, b,loc=loc,scale=scale)
+
+
+def truncated_norm_cdf(x,mean, sd, lower=0, upper=1):
+    a_trunc  = lower  # truncation
+    b_trunc = upper
+    # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.truncnorm.html
+    loc = mean
+    scale = sd
+    a, b = (a_trunc - loc) / scale, (b_trunc - loc) / scale # the way a,b are defined by scipy
+
+    return truncnorm.cdf(x, a, b, loc=loc, scale=scale)
+
+# interval in form of [lower_bound, upper_bound]
+def truncated_norm_cdf_interval(interval,mean,sd):
+    return truncated_norm_cdf(interval[1], mean, sd) - truncated_norm_cdf(interval[0], mean, sd)
 
 def simulated_score(theta_RT, theta_MS, theta_HS,mean, sd):
     # sample damage from truncated normal distribution
@@ -90,35 +108,160 @@ def difference_full_data(known_scores, known_damages,theta_RT, theta_MS, theta_H
 
     return difference
 
+def get_simulated_distribution(theta_RT, theta_MS, theta_HS,mean, sd):
+    # the distribution can be calculated 'exactly' via the culumative
+    RT_prob = truncated_norm_cdf_interval([0,theta_RT],mean,sd)
+    MS_prob = truncated_norm_cdf_interval([theta_RT,theta_MS],mean,sd)
+    HS_prob = truncated_norm_cdf_interval([theta_MS, theta_HS],mean,sd)
+    ES_prob = truncated_norm_cdf_interval([theta_HS, 1],mean,sd)
+    return {'RT':RT_prob, 'MS':MS_prob, 'HS':HS_prob,'ES':ES_prob}
 
+# Kullback–Leibler (KL) divergence
 def difference_distribution(known_freq,num_samples,theta_RT, theta_MS, theta_HS,mean, sd):
-    list_of_simulated_scores = [simulated_score(theta_RT, theta_MS, theta_HS,mean, sd) for i in range(num_samples)]
-
     ratings_list = ['RT','MS','HS','ES']
+    difference = 0
 
-    simulated_freq = {'RT':0, 'MS':0, 'HS':0,'ES':0}
-    for val in list_of_simulated_scores:
-        for sc in ratings_list:
-            if sc in val:
-                simulated_freq[sc] +=1
+    # list_of_simulated_scores = [simulated_score(theta_RT, theta_MS, theta_HS,mean, sd) for i in range(num_samples)]
+    # simulated_freq = {'RT':0, 'MS':0, 'HS':0,'ES':0}
+    # for val in list_of_simulated_scores:
+    #     for sc in ratings_list:
+    #         if sc in val:
+    #             simulated_freq[sc] +=1
     
 
-    simulated_freq_density = {sc:simulated_freq[sc]/num_samples  for sc in ratings_list}
+    # simulated_freq_density = {sc:simulated_freq[sc]/num_samples  for sc in ratings_list}
 
     # https://en.wikipedia.org/wiki/Statistical_distance 
     # something like statistical distance
-    difference = 0
-    for sc in ['RT','MS','HS','ES']:
-        difference+=abs(known_freq[sc]-simulated_freq_density[sc])
+    # for sc in ratings_list:
+    #     difference+=abs(known_freq[sc]-simulated_freq_density[sc])
+    # difference = difference/2 
 
-    # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wasserstein_distance.html
+    simulated_freq_density = get_simulated_distribution(theta_RT, theta_MS, theta_HS,mean, sd)
+
+    for r in ratings_list:
+        # difference += known_freq[r]*np.log(known_freq[r]/simulated_freq_density[r])
+        difference += known_freq[r]*(np.log(known_freq[r]) - np.log(simulated_freq_density[r]))
+        # try:
+        #     difference += known_freq[r]*(np.log(known_freq[r]) - np.log(simulated_freq_density[r]))
+        # except RuntimeWarning:
+            # breakpoint()
+
+    return difference
 
 
-    return difference/2
+def prior_prediction():
+    # getting the data
+    folder_path = os.path.join(os.path.dirname(__file__))
+    df = pd.read_csv( os.path.dirname(__file__) + '/data_myrtle_rust_susceptibility_new.csv')
+    not_null_mask = df.notnull().all(axis=1)
+    df_OG = df[not_null_mask]
+    df_new = df[~not_null_mask]
+
+    # data set 1 - df_OG 
+    # average out damages from the same species 
+    # df_OG = df_OG.groupby(['Species','Rating'])['Damage'].mean()
+    df_OG = df_OG.groupby(['Species','Rating'])[['Damage']].agg('mean').reset_index()
+    print(df_OG)
+    x_name = "Rating"
+    y_name = "Damage"
+    x = df_OG[x_name].tolist()
+    y = df_OG[y_name].tolist()
+
+    # data set two:
+    # remove duplicate names with the same rating 
+    df1 = df[['Species', 'Rating']]
+    df1 = df1.drop_duplicates()
+    x2 = df1[x_name].tolist()
+    ratings_list = ['RT','MS','HS','ES']
+    freq = {'RT':0, 'MS':0, 'HS':0,'ES':0}
+    total_samples = 0
+    for val in x2:
+        temp_count = {}
+        for sc in ratings_list:
+            if sc in val:
+                temp_count[sc]=1
+        for sc in temp_count.keys():
+            freq[sc] +=1/len(temp_count)  # some species have ratings that span multiple categories
+
+    total_samples = sum([freq[sc] for sc in ratings_list])
+
+    freq_density = {sc:freq[sc]/total_samples  for sc in ratings_list}
+
+    # get the prior predictive distribution
+    # involves accepting everything
+    # and basically see what the distribution of differences are (to help us define thresholds)
+    difference_known_list = []
+    difference_freq_list = []
+    for i in range (0, 20000):
+        # sample from priors
+        thresholds_ordered = False 
+        while not thresholds_ordered:
+            theta_RT = truncated_norm(mean=1/4, sd=1)
+            theta_MS = truncated_norm(mean=2/4, sd=1)
+            theta_HS = truncated_norm(mean=3/4, sd=1)
+            if theta_RT<0 or theta_MS<0 or theta_HS<0:
+                exit(1)
+            if theta_RT < theta_MS and theta_MS<theta_HS and abs(theta_RT - theta_MS)>0.001 and abs(theta_MS - theta_HS)>0.001:
+                # making sure values are ordered and there is some seperation between thresholds
+                thresholds_ordered = True
+
+        # mean and sd should probably from an inverse gamma 
+            mean = np.random.normal(loc=0,scale=2)
+            sd = np.random.uniform(0,10)
+        
+        # generate simulated data and compare with known data
+        # compare with combination data (score + known damage)
+        difference_known = difference_full_data(x, y,theta_RT, theta_MS, theta_HS)
+        
+
+        # plus compare with score only damage - KL divergence for the susceptibility ratings
+        difference_freq = difference_distribution(freq_density,total_samples,theta_RT, theta_MS, theta_HS,mean, sd)
+        if difference_freq>1000000: # it gets really large sometimes for some reason
+            pass # discard these
+        else:
+            difference_known_list.append(difference_known)
+            difference_freq_list.append(difference_freq)
+
+    # plot 
+    density_difference_known = gaussian_kde(np.array(difference_known_list))
+    density_difference_known.covariance_factor = lambda : .25
+    density_difference_known._compute_covariance()
+
+    density_difference_freq = gaussian_kde(np.array(difference_freq_list))
+    density_difference_freq.covariance_factor = lambda : .25
+    density_difference_freq._compute_covariance()
+
+    xs = np.linspace(0, 6, 200)
+    fig, ax = plt.subplots(1,1, figsize=(8,4))
+    ax.fill_between(xs, density_difference_known(xs),label="difference known", alpha=0.1)
+    ax.set_xlabel("value")
+    ax.set_ylabel("density")
+    ax.legend()
+    ax.grid()
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_prior_predictive_difference_known.png"), bbox_inches='tight')
+
+    xs = np.linspace(0, 6, 200)
+    fig, ax = plt.subplots(1,1, figsize=(8,4))
+    ax.fill_between(xs, density_difference_freq(xs),label="difference freq", alpha=0.1)
+    ax.set_xlabel("value")
+    ax.set_ylabel("density")
+    ax.legend()
+    ax.grid()
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_prior_predictive_difference_freq.png"), bbox_inches='tight')
+    
+    
+    fig, ax = plt.subplots(1,1, figsize=(8,4))
+    ax.scatter(difference_known_list,difference_freq_list,alpha=0.1 )
+    ax.set_xlabel("difference known")
+    ax.set_ylabel("difference freq")
+    ax.set_yscale('log')
+    ax.grid()
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_difference_known_vs_freq.png"), bbox_inches='tight')
+    
 
 
-
-def ABC(num_samples, threshold):
+def ABC(num_samples, threshold_known,threshold_freq):
 
     # posterior distributions
     theta_RT_post = []
@@ -134,30 +277,43 @@ def ABC(num_samples, threshold):
     df_OG = df[not_null_mask]
     df_new = df[~not_null_mask]
 
-    # data set 1
+    # data set 1 - df_OG 
+    # average out damages from the same species 
+    # df_OG = df_OG.groupby(['Species','Rating'])['Damage'].mean()
+    df_OG = df_OG.groupby(['Species','Rating'])[['Damage']].agg('mean').reset_index()
+    print(df_OG)
     x_name = "Rating"
     y_name = "Damage"
     x = df_OG[x_name].tolist()
     y = df_OG[y_name].tolist()
 
     # data set two:
-    x2 = df[x_name].tolist()
+    # remove duplicate names with the same rating 
+    df1 = df[['Species', 'Rating']]
+    df1 = df1.drop_duplicates()
+    x2 = df1[x_name].tolist()
     ratings_list = ['RT','MS','HS','ES']
     freq = {'RT':0, 'MS':0, 'HS':0,'ES':0}
     total_samples = 0
     for val in x2:
+        temp_count = {}
         for sc in ratings_list:
             if sc in val:
-                freq[sc] +=1
+                temp_count[sc]=1
+        for sc in temp_count.keys():
+            freq[sc] +=1/len(temp_count)  # some species have ratings that span multiple categories
 
     total_samples = sum([freq[sc] for sc in ratings_list])
 
     freq_density = {sc:freq[sc]/total_samples  for sc in ratings_list}
+
+
     num_tries = 0
 
     for i in range (0, num_samples):
-        distance = threshold+1
-        while distance > threshold: # while distance is too big, sample:
+        difference_known = threshold_known+1
+        difference_freq = threshold_freq+1
+        while difference_known > threshold_known or difference_freq>threshold_freq: # while distance is too big, sample:
             num_tries+=1
             # sample from priors
             thresholds_ordered = False 
@@ -177,15 +333,15 @@ def ABC(num_samples, threshold):
             # generate simulated data and compare with known data
             # compare with combination data (score + known damage)
             difference_known = difference_full_data(x, y,theta_RT, theta_MS, theta_HS)
-            # TODO there is only 11 of these, so...actually, it would be good if like at least half of them were right??? 
 
-            # plus compare with score only damage - frequency distribution
+            # plus compare with score only damage - KL divergence for the susceptibility ratings
             difference_freq = difference_distribution(freq_density,total_samples,theta_RT, theta_MS, theta_HS,mean, sd)
 
-            # sum up
-            distance = difference_known+difference_freq
+            # multiply together
+            # distance = difference_known*difference_freq
 
-            # print(f"{difference_known}, {difference_freq}, {distance}")
+            # if difference_known<1:
+            #     print(f"difference_known less than 1: {difference_known}, {difference_freq}, {distance}")
 
         theta_RT_post.append(theta_RT)
         theta_MS_post.append(theta_MS)
@@ -193,9 +349,10 @@ def ABC(num_samples, threshold):
         mean_post.append(mean)
         sd_post.append(sd)
 
-        
+        if difference_freq>threshold_freq:
+            breakpoint()
 
-        print(f"{difference_known}, {difference_freq}, {distance}")
+        print(f"{difference_known}, {difference_freq}")
 
     acceptance_rate = num_samples/num_tries
     print(f"Acceptance rate: {acceptance_rate}")
@@ -204,13 +361,13 @@ def ABC(num_samples, threshold):
 
     return theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post
 
-def one_iteration(folder_path, num_samples, threshold, it_num):
-    csv_file_name = os.path.join(folder_path, "bayes_samples", f"bayes_posteriors_thres{threshold}_num{num_samples}_{it_num}.csv")
+def one_iteration(folder_path, num_samples, threshold_known,threshold_freq, it_num):
+    csv_file_name = os.path.join(folder_path, "bayes_samples", f"bayes_posteriors_thres{threshold_known}_{threshold_freq}_num{num_samples}_{it_num}.csv")
 
     if os.path.isfile(csv_file_name):
         return # skip this iteration if file already computed and exists
 
-    theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = ABC(num_samples, threshold)
+    theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = ABC(num_samples, threshold_known, threshold_freq)
 
     with open(csv_file_name, 'w',newline='') as f:
 
@@ -224,10 +381,11 @@ def main(folder_path = os.path.join(os.path.dirname(__file__))):
 
     num_samples = 10 # better to run in smaller batches, which will get done in a reasonable time, and then combine them all    
 
-    threshold =0.7
+    threshold_known = 0.5
+    threshold_freq = 0.1
 
     for it_num in range(0,10):
-        one_iteration(folder_path, num_samples, threshold, it_num)
+        one_iteration(folder_path, num_samples, threshold_known,threshold_freq, it_num)
         
     
 
@@ -236,10 +394,12 @@ if __name__ == "__main__":
     parser.add_argument('--it_num', '-num', default="")
     args = parser.parse_args()
     it_num = args.it_num
-    if it_num == "":  # i.e., default:
+    if it_num == "":  # i.e., default:, i.e. running on local computer
+        prior_prediction()
         main()
     else:
         folder_path = os.path.join(os.path.dirname(__file__))
         num_samples = 10
-        threshold =0.7
-        one_iteration(folder_path, num_samples, threshold, int(it_num))
+        threshold_known = 0.5
+        threshold_freq = 0.1
+        one_iteration(folder_path, num_samples, threshold_known,threshold_freq, int(it_num))
