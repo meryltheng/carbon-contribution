@@ -153,6 +153,9 @@ M_max = M_P1 * temp_max**3 + M_P2 * temp_max**2 + M_P3 * temp_max + M_P4
 Y_max = C_max*exp(-exp(-B * (hours_of_high_RH - M_max)))
 infection_risk_tmax = Y_max * L
 
+#writeRaster(infection_risk_tmin, paste0(target_dir, 'infection_risk_tmin.tif'), overwrite=TRUE)
+#writeRaster(infection_risk_tmax, paste0(target_dir, 'infection_risk_tmax.tif'), overwrite=TRUE)
+
 # -- plot
 par(mfrow = c(1, 2))
 plot(infection_risk_tmin, main='inf. risk. tmin')
@@ -179,6 +182,9 @@ clim_mask_resampled <- terra::resample(clim_mask, s, method="near")
 writeRaster(clim_mask_resampled, paste0(target_dir, 'clim_mask_resamp.tif'), overwrite=TRUE)
 
 "----------- Calculate area within each MVG that is climate suitable ---------------"
+# load climate mask layer (if done)
+clim_mask_resampled <- rast(paste0(target_dir, 'clim_mask_resamp.tif'))
+
 # create masked nvis layer
 nvis_masked = nvis
 nvis_masked[clim_mask_resampled==0] = NA # set all cells that are not suitable to NA
