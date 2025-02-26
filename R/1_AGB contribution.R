@@ -91,11 +91,11 @@ rm(all_data, agb_data_1, agb_data_2, agb_data_3, agb_data_4, no_match, still_no_
 # estimate AGB based on eqns given by https://doi.org/10.1111/gcb.13201 
 agb_estimates <- agb_estimates %>%
   mutate(agb_estimate = case_when(
-    func_type_agb == "F Shrub" ~ exp(-3.007 + 2.428 * log(diameter) * 1.128),
-    func_type_agb == "F Multi" ~ exp(-2.757 + 2.474 * log(diameter) * 1.079),
-    func_type_agb == "F Euc" ~ exp(-2.016 + 2.375 * log(diameter) * 1.067),
-    func_type_agb == "F Other-H" ~ exp(-1.693 + 2.220 * log(diameter) * 1.044),
-    func_type_agb == "F Other-L" ~ exp(-2.573 + 2.460 * log(diameter) * 1.018)
+    func_type_agb == "F Shrub" ~ exp(-3.007 + 2.428 * log(diameter)) * 1.128,
+    func_type_agb == "F Multi" ~ exp(-2.757 + 2.474 * log(diameter)) * 1.079,
+    func_type_agb == "F Euc" ~ exp(-2.016 + 2.375 * log(diameter)) * 1.067,
+    func_type_agb == "F Other-H" ~ exp(-1.693 + 2.220 * log(diameter)) * 1.044,
+    func_type_agb == "F Other-L" ~ exp(-2.573 + 2.460 * log(diameter)) * 1.018
   ))
 
 save(agb_estimates, file = "Input/agb_estimates.RData")

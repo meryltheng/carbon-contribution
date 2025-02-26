@@ -28,10 +28,10 @@ no_match <- all_data_bgb %>%
 # estimate BGB based on eqns given by https://doi.org/10.1016/j.foreco.2018.08.043
 biomass_estimates <- all_data_bgb %>%
   mutate(bgb_estimate = case_when(
-    func_type_bgb == "FShrub&Ac" ~ exp(-3.553 + 2.185 * log(diameter) * 1.160),
-    func_type_bgb == "FMallee" ~ exp(-2.946 + 2.302 * log(diameter) * 1.116),
-    func_type_bgb == "FTree" ~ exp(-2.682 + 2.212 * log(diameter) * 1.096),
-    func_type_bgb == "FRadiata" ~ exp(-3.740 + 2.299 * log(diameter) * 1.053)
+    func_type_bgb == "FShrub&Ac" ~ exp(-3.553 + 2.185 * log(diameter)) * 1.160,
+    func_type_bgb == "FMallee" ~ exp(-2.946 + 2.302 * log(diameter)) * 1.116,
+    func_type_bgb == "FTree" ~ exp(-2.682 + 2.212 * log(diameter)) * 1.096,
+    func_type_bgb == "FRadiata" ~ exp(-3.740 + 2.299 * log(diameter)) * 1.053
   )) %>%
   mutate(t_biomass_estimate = agb_estimate + bgb_estimate)
 
@@ -56,9 +56,9 @@ biomass_est_mvg <- biomass_est_std %>%
   summarise(n_sites_per_mvg = unique(n_sites_per_mvg),
             genus = unique(genus),
             mvgValue = unique(mvgValue),
-            t_biomass_per_ha = mean(t_biomass_per_ha, na.rm = T)) %>% # standardised to per ha
-  group_by(mvgValue) %>%
-  summarise(biomass_perc = )
+            t_biomass_per_ha = mean(t_biomass_per_ha, na.rm = T))# %>% # standardised to per ha
+  #group_by(mvgValue) %>%
+ # summarise(biomass_perc = )
 
 # class genera with > 10% contribution under "other"
 biomass_est_mvg0 <- biomass_est_mvg %>% 
@@ -112,11 +112,11 @@ x.labels = c("1 Rainforests and Vine Thickets", #1
              "32 Mallee Open Woodlands and Sparse Mallee Shrublands") #32
 
 # PLOT
-ggplot(biomass_est_mvg, aes(x = as.factor(mvgValue), y = t_biomass_per_ha/1000, fill = genus)) +
-  geom_bar(stat = 'identity',color='black') + # position='fill' if want proportion
-  labs(x = "MVG", y = "Biomass contribution per ha (t)") +
-  #geom_text(aes(label = n_sites_per_mvg), vjust=0) + # how do I just have one label per mvg
-  theme_bw()
+# ggplot(biomass_est_mvg, aes(x = as.factor(mvgValue), y = t_biomass_per_ha/1000, fill = genus)) +
+#   geom_bar(stat = 'identity',color='black') + # position='fill' if want proportion
+#   labs(x = "MVG", y = "Biomass contribution per ha (t)") +
+#   #geom_text(aes(label = n_sites_per_mvg), vjust=0) + # how do I just have one label per mvg
+#   theme_bw()
 
 # with genera > 10% contribution under "other"
 ggplot(biomass_est_mvg0, aes(x = as.factor(mvgValue), y = t_biomass_per_ha/1000, fill = genus)) +

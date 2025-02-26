@@ -79,24 +79,22 @@ biomass_growth_est<- biomass_growth_est %>%
 biomass_seq <- biomass_growth_est %>%
   mutate(diameter_1y = diameter + diameter_increment_yr) %>%
   mutate(agb_estimate_1y = case_when(
-    func_type_agb == "F Shrub" ~ exp(-3.007 + 2.428 * log(diameter_1y) * 1.128),
-    func_type_agb == "F Multi" ~ exp(-2.757 + 2.474 * log(diameter_1y) * 1.079),
-    func_type_agb == "F Euc" ~ exp(-2.016 + 2.375 * log(diameter_1y) * 1.067),
-    func_type_agb == "F Other-H" ~ exp(-1.693 + 2.220 * log(diameter_1y) * 1.044),
-    func_type_agb == "F Other-L" ~ exp(-2.573 + 2.460 * log(diameter_1y) * 1.018)
+    func_type_agb == "F Shrub" ~ exp(-3.007 + 2.428 * log(diameter_1y)) * 1.128,
+    func_type_agb == "F Multi" ~ exp(-2.757 + 2.474 * log(diameter_1y)) * 1.079,
+    func_type_agb == "F Euc" ~ exp(-2.016 + 2.375 * log(diameter_1y)) * 1.067,
+    func_type_agb == "F Other-H" ~ exp(-1.693 + 2.220 * log(diameter_1y)) * 1.044,
+    func_type_agb == "F Other-L" ~ exp(-2.573 + 2.460 * log(diameter_1y)) * 1.018
   )) %>%
   mutate(bgb_estimate_1y = case_when(
-    func_type_bgb == "FShrub&Ac" ~ exp(-3.553 + 2.185 * log(diameter_1y) * 1.160),
-    func_type_bgb == "FMallee" ~ exp(-2.946 + 2.302 * log(diameter_1y) * 1.116),
-    func_type_bgb == "FTree" ~ exp(-2.682 + 2.212 * log(diameter_1y) * 1.096),
-    func_type_bgb == "FRadiata" ~ exp(-3.740 + 2.299 * log(diameter_1y) * 1.053)
+    func_type_bgb == "FShrub&Ac" ~ exp(-3.553 + 2.185 * log(diameter_1y)) * 1.160,
+    func_type_bgb == "FMallee" ~ exp(-2.946 + 2.302 * log(diameter_1y)) * 1.116,
+    func_type_bgb == "FTree" ~ exp(-2.682 + 2.212 * log(diameter_1y)) * 1.096,
+    func_type_bgb == "FRadiata" ~ exp(-3.740 + 2.299 * log(diameter_1y)) * 1.053
   )) %>%
   mutate(t_biomass_estimate_1y = agb_estimate_1y + bgb_estimate_1y) %>%
   mutate(biomass_sequestered = t_biomass_estimate_1y - t_biomass_estimate) 
 
 "----------- Biomass sequestered per ha per year per genus per MVG ---------------" 
-#load("Input/biomass_seq.RData") # if processed
-
 biomass_seq_std <- biomass_seq %>%
   group_by(site, genus) %>%
   summarise(geometry = unique(geometry),
@@ -128,7 +126,7 @@ biomass_seq_mvg0 <- biomass_seq_mvg %>%
             mvgValue = unique(mvgValue),
             t_biomass_seq_ha = sum(t_biomass_seq_ha, na.rm = T)) 
 
-#save(biomass_seq, biomass_seq_std, biomass_seq_mvg,file = "Input/biomass_seq.RData")
+#save(biomass_seq, biomass_seq_std, biomass_seq_mvg, biomass_seq_mvg0, file = "Input/biomass_seq.RData")
 
 "----------- Visualise! ---------------"
 library(ggplot2)
@@ -169,21 +167,18 @@ x.labels = c("1 Rainforests and Vine Thickets", #1
              "32 Mallee Open Woodlands and Sparse Mallee Shrublands") #32
 
 # PLOT
-ggplot(biomass_seq_mvg, aes(x = as.factor(mvgValue), y = t_biomass_seq_ha/1000, fill = genus)) +
-  geom_bar(stat = 'identity', color='black') + # position='fill' if want proportion
-  labs(x = "MVG", y = "Biomass sequestered per ha per year (t)") +
-  scale_fill_manual(values = genus_cols, name = "Genus") +
-  #geom_text(aes(label = n_sites_per_mvg), vjust=0) + # how do I just have one label per mvg
-  theme_bw()
-
-# bar plot
-ggplot(biomass_seq_mvg0, aes(x = as.factor(mvgValue), y = t_biomass_seq_ha/1000*0.5, fill = genus)) +
+C_seq_plot <- ggplot(biomass_seq_mvg0, aes(x = as.factor(mvgValue), y = t_biomass_seq_ha/1000*0.5, fill = genus)) +
   geom_bar(stat = 'identity', color='black') + # position='fill' if want proportion
   labs(x = "MVG", y = "Carbon sequestered per ha per year (t)") +
   scale_fill_manual(values = c("dodgerblue2", "#E31A1C", "gold2", "darkorange4", "green4", "orchid1", "black"),
                     name = "Genus") +
   #geom_text(aes(label = n_sites_per_mvg), vjust=0) + # how do I just have one label per mvg
   scale_x_discrete(labels = str_wrap(x.labels[unique(biomass_seq_mvg0$mvgValue)], 7)) +
-  theme(axis.text.x=element_text(size=7)) +
-  theme_bw() 
-#save(biomass_seq, biomass_seq_std, biomass_seq_mvg, genus_cols, file = "Input/biomass_seq.RData")
+  theme_bw() +
+  theme(axis.text.x=element_text(size=8),
+        axis.title.y = element_text(size = 12))
+
+
+ggsave(filename=paste0("Plots/C_seq_ha_mvg.pdf"), plot=C_seq_plot, width=9, height=5) 
+
+
