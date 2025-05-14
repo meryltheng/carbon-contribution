@@ -79,41 +79,53 @@ def plot_damage_normal_param_densities(mean_post,sd_post, folder_path):
 def plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path ):
     xs = np.linspace(0, 1, 200)
     fig, ax = plt.subplots(1,1, figsize=(8,4))
-    ax.plot(xs, truncated_norm_pdf(xs,mean_post[index], sd_post[index]),label="damage distribution")
+    ax.plot(xs, truncated_norm_pdf(xs,mean_post[index], sd_post[index]),label="damage distribution",color="crimson",linewidth =4 )
+
+    plt.axvline(x=0,ls='--',color="black")
+    plt.axvline(x=1,ls='--',color="black")
 
     plt.axvline(x=theta_RT_post[index],ls='--',color="black")
     ax.annotate("$\\theta_{RT}$",
-            xy=(theta_RT_post[index], 0.2), xycoords='data',
-            xytext=(1.5, 1.5), textcoords='offset points')
+            xy=(theta_RT_post[index]-0.08, 0.15), xycoords='data',
+            xytext=(1.5, 1.5), textcoords='offset points',
+            fontsize=18)
 
     plt.axvline(x=theta_MS_post[index],ls='--',color="black")
     ax.annotate("$\\theta_{MS}$",
-            xy=(theta_MS_post[index], 0.2), xycoords='data',
-            xytext=(1.5, 1.5), textcoords='offset points')
+            xy=(theta_MS_post[index]-0.08, 0.15), xycoords='data',
+            xytext=(1.5, 1.5), textcoords='offset points',
+            fontsize=18)
     
     plt.axvline(x=theta_HS_post[index],ls='--',color="black") 
     ax.annotate("$\\theta_{HS}$",
-            xy=(theta_HS_post[index], 0.2), xycoords='data',
-            xytext=(1.5, 1.5), textcoords='offset points')
+            xy=(theta_HS_post[index]-0.08, 0.15), xycoords='data',
+            xytext=(1.5, 1.5), textcoords='offset points',
+            fontsize=18)
+
+    cmap = matplotlib.colormaps['inferno']
+    reversed_cmap = cmap.reversed()
 
     xs = np.linspace(0, theta_RT_post[index], 200)
-    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Relatively tolerant", alpha=0.1)
+    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Relatively tolerant", alpha=0.3,color=reversed_cmap(1/5))
 
     xs = np.linspace(theta_RT_post[index],theta_MS_post[index], 200)
-    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Moderate susceptibility", alpha=0.1)
+    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Moderate susceptibility", alpha=0.3,color=reversed_cmap(2/5))
 
     xs = np.linspace(theta_MS_post[index],theta_HS_post[index], 200)
-    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="High susceptibility", alpha=0.1)
+    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="High susceptibility", alpha=0.3,color=reversed_cmap(3/5))
 
     xs = np.linspace(theta_HS_post[index],1, 200)
-    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Extreme susceptibility", alpha=0.1)
+    ax.fill_between(xs,truncated_norm_pdf(xs, mean_post[index], sd_post[index]),label="Extreme susceptibility", alpha=0.3,color=reversed_cmap(4/5))
 
-    ax.legend()
+    ax.legend(fontsize=16,framealpha=1)
 
     ax.grid()
 
-    ax.set_xlabel("damage")
-    ax.set_ylabel("density")
+    ax.tick_params(axis='both', which='major', labelsize=14)
+    # ax.tick_params(axis='both', which='minor', labelsize=8)
+
+    ax.set_xlabel("damage",fontsize=16)
+    ax.set_ylabel("density",fontsize=16)
 
     plt.savefig( os.path.join(folder_path, "figures", f"bayes_sample_dis-{index}.png"), bbox_inches='tight')
 
@@ -172,12 +184,14 @@ def plotting(num_samples,threshold_known,threshold_freq,max_it_number = 10, fold
 
     theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold_known, threshold_freq,max_it_number)
 
-    plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder_path)
+    # plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder_path)
 
-    plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
+    # plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
 
-    for index in  [0,10,20,30,40,50]:  #  range(0,10): #  TODO: a proper random choice
+    for index in [2,10]: #  [0,10,20,30,40,50]:  # range(0,10)  # 
         plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path )
+
+    return
 
     plot_posterior_across_included_samples(theta_RT_post,"RT threshold","Posterior of $\\theta_{RT}$ threshold",[0,1], folder_path, "thresholdRT")
 
