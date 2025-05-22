@@ -40,18 +40,27 @@ def plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder
     density_HS._compute_covariance()
 
     xs = np.linspace(0, 1, 200)
-    fig, ax = plt.subplots(1,1, figsize=(8,4))
-    ax.fill_between(xs, density_RT(xs),label="RT - Relatively tolerant", alpha=0.1)
-    ax.fill_between(xs, density_MS(xs),label="MS - Moderate susceptibility", alpha=0.1)
-    ax.fill_between(xs, density_HS(xs),label="HS - High susceptibility", alpha=0.1)
-    ax.set_title("posterior thresholds")
-    ax.set_xlabel("damage")
+    fig, ax = plt.subplots(1,1, figsize=(10,5))
+
+    cmap = matplotlib.colormaps['inferno']
+    reversed_cmap = cmap.reversed()
+
+    ax.fill_between(xs, density_RT(xs), alpha=0.2,color=reversed_cmap(1/5))
+    ax.plot(xs, density_RT(xs),label="$\\theta_{RT}$",color=reversed_cmap(1/5))
+    ax.fill_between(xs, density_MS(xs), alpha=0.2,color=reversed_cmap(2/5))
+    ax.plot(xs,density_MS(xs),label="$\\theta_{MS}$",color=reversed_cmap(2/5))
+    ax.fill_between(xs, density_HS(xs), alpha=0.2,color=reversed_cmap(3/5))
+    ax.plot(xs, density_HS(xs),label="$\\theta_{HS}$",color=reversed_cmap(3/5))
+    # ax.set_title("posterior thresholds")
+    ax.set_xlabel("Threshold value")
     ax.set_ylabel("density")
     ax.legend()
+    ax.set_xlim([0,1])
 
     ax.grid()
 
     plt.savefig( os.path.join(folder_path, "figures", "bayes_thresholds_posteriors.png"), bbox_inches='tight')
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_thresholds_posteriors.pdf"), bbox_inches='tight')
 
 def plot_damage_normal_param_densities(mean_post,sd_post, folder_path):
     density_mean = gaussian_kde(np.array(mean_post))
@@ -63,17 +72,21 @@ def plot_damage_normal_param_densities(mean_post,sd_post, folder_path):
     density_sd._compute_covariance()
 
     xs = np.linspace(-5, 6, 200)
-    fig, ax = plt.subplots(1,1, figsize=(8,4))
-    ax.fill_between(xs, density_mean(xs),label="mean", alpha=0.1)
-    ax.fill_between(xs, density_sd(xs),label="standard deviation", alpha=0.1)
-    ax.set_title("parameters for damage density normal")
+    fig, ax = plt.subplots(1,1, figsize=(10,5))
+    ax.fill_between(xs, density_mean(xs), alpha=0.1,color="#0066cc")
+    ax.fill_between(xs, density_sd(xs), alpha=0.1,color="#00cc99")
+    ax.plot(xs, density_mean(xs),label="$\mu$ mean",color="#0066cc")
+    ax.plot(xs,density_sd(xs),label="$\sigma$ standard deviation",color="#00cc99")
+    # ax.set_title("parameters for damage density normal")
     ax.set_xlabel("value")
     ax.set_ylabel("density")
     ax.legend()
 
     ax.grid()
+    ax.set_xlim([-5,6])
 
     plt.savefig( os.path.join(folder_path, "figures", "bayes_damagenormal_posteriors.png"), bbox_inches='tight')
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_damagenormal_posteriors.pdf"), bbox_inches='tight')
 
 
 def plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path ):
@@ -184,14 +197,18 @@ def plotting(num_samples,threshold_known,threshold_freq,max_it_number = 10, fold
 
     theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post = combine_data(num_samples,threshold_known, threshold_freq,max_it_number)
 
-    # plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder_path)
+    print(len(theta_RT_post))
 
-    # plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
+    plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder_path)
+
+    plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
+
+    return
 
     for index in [2,10]: #  [0,10,20,30,40,50]:  # range(0,10)  # 
         plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path )
 
-    return
+    
 
     plot_posterior_across_included_samples(theta_RT_post,"RT threshold","Posterior of $\\theta_{RT}$ threshold",[0,1], folder_path, "thresholdRT")
 

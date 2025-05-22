@@ -153,7 +153,7 @@ def difference_distribution(known_freq,num_samples,theta_RT, theta_MS, theta_HS,
 def prior_prediction():
     # getting the data
     folder_path = os.path.join(os.path.dirname(__file__))
-    df = pd.read_csv( os.path.dirname(__file__) + '/data_myrtle_rust_susceptibility_new.csv')
+    df = pd.read_csv( os.path.dirname(__file__) + '/data_myrtle_rust_susceptibility.csv')
     not_null_mask = df.notnull().all(axis=1)
     df_OG = df[not_null_mask]
     df_new = df[~not_null_mask]
@@ -251,13 +251,15 @@ def prior_prediction():
     plt.savefig( os.path.join(folder_path, "figures", "bayes_prior_predictive_difference_freq.png"), bbox_inches='tight')
     
     
-    fig, ax = plt.subplots(1,1, figsize=(8,4))
-    ax.scatter(difference_known_list,difference_freq_list,alpha=0.1 )
-    ax.set_xlabel("difference known")
-    ax.set_ylabel("difference freq")
+    fig, ax = plt.subplots(1,1, figsize=(10,6))
+    ax.scatter(difference_known_list,difference_freq_list,alpha=0.1,color="#293d3d" )
+    ax.set_xlabel(r"$D_{rating}$")
+    ax.set_ylabel(r"$D_{KL}$")
     ax.set_yscale('log')
     ax.grid()
     plt.savefig( os.path.join(folder_path, "figures", "bayes_difference_known_vs_freq.png"), bbox_inches='tight')
+
+    plt.savefig( os.path.join(folder_path, "figures", "bayes_difference_known_vs_freq.pdf"), bbox_inches='tight')
     
 
 
@@ -396,7 +398,7 @@ if __name__ == "__main__":
     it_num = args.it_num
     if it_num == "":  # i.e., default:, i.e. running on local computer
         prior_prediction()
-        main()
+        # main()
     else:
         folder_path = os.path.join(os.path.dirname(__file__))
         num_samples = 10
