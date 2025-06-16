@@ -40,7 +40,7 @@ def plot_threshold_densities(theta_RT_post, theta_MS_post, theta_HS_post, folder
     density_HS._compute_covariance()
 
     xs = np.linspace(0, 1, 200)
-    fig, ax = plt.subplots(1,1, figsize=(10,5))
+    fig, ax = plt.subplots(1,1, figsize=(5,3.5))
 
     cmap = matplotlib.colormaps['inferno']
     reversed_cmap = cmap.reversed()
@@ -72,7 +72,7 @@ def plot_damage_normal_param_densities(mean_post,sd_post, folder_path):
     density_sd._compute_covariance()
 
     xs = np.linspace(-5, 6, 200)
-    fig, ax = plt.subplots(1,1, figsize=(10,5))
+    fig, ax = plt.subplots(1,1, figsize=(5,3.5))
     ax.fill_between(xs, density_mean(xs), alpha=0.1,color="#0066cc")
     ax.fill_between(xs, density_sd(xs), alpha=0.1,color="#00cc99")
     ax.plot(xs, density_mean(xs),label="$\mu$ mean",color="#0066cc")
