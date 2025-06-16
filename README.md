@@ -22,7 +22,6 @@ bioRxiv 2025.05.30.657121; doi: [10.1101/2025.05.30.657121](https://doi.org/10.1
 `Python/`: Python scripts to run myrtle rust impact at the species/genus level
 
 `R/`:R scripts for data preparation and national-level impact analysis. Tasks include: climate data processing, spatial biomass calculations, carbon sequestration impact estimation. The scripts are sequentially numbered from `0` to `7`, with each script building on the previous one. They are designed to be run in order. Running the full pipeline will generate processed inputs in the `Input/` folder and final outputs in the `Output/` folder.
-**Note:** Omit the `4_Damages.R` script. This script was used in the initial version of the analysis (for the [report](https://cebra.unimelb.edu.au/__data/assets/pdf_file/0006/5054550/23C_FINAL_Report.pdf)), but has been replaced by the `6_Damages plus.R` script in the current version.
 
 
 ### Code authorship
@@ -35,5 +34,4 @@ The code in the `Python` folder is written by Thao P. Le.
 
 Steps to estimate myrtle rust impact at the species/genus level are found in the `Python` folder.
 
-To run the overall impact estimate (at the national level), run the R files in the `R` folder sequentially (from 0 to 7).
-
+To run the overall impact estimate (at the national level), run the R files in the `R` folder sequentially (from 0 to 7). **Note:** Omit the `4_Damages.R` script. This script was used in the initial version of the analysis (for the [report](https://cebra.unimelb.edu.au/__data/assets/pdf_file/0006/5054550/23C_FINAL_Report.pdf)), but has been replaced by the `6_Damages plus.R` script in the current version.
