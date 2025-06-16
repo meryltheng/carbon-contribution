@@ -1,3 +1,5 @@
+# Conducts Approximate Bayesian Computation to estimate the impact of myrtle rust on specific genera/species given the available qualitative and quantitative data.
+
 import numpy as np
 from scipy.stats import truncnorm
 import pandas as pd
@@ -12,9 +14,6 @@ from scipy.stats import norm
 import pickle
 import csv
 import argparse
-
-# import warnings
-# warnings.filterwarnings("error")
 
 def simulated_score_given_damage(damage,theta_RT, theta_MS, theta_HS):
     if damage< theta_RT:
@@ -121,31 +120,10 @@ def difference_distribution(known_freq,num_samples,theta_RT, theta_MS, theta_HS,
     ratings_list = ['RT','MS','HS','ES']
     difference = 0
 
-    # list_of_simulated_scores = [simulated_score(theta_RT, theta_MS, theta_HS,mean, sd) for i in range(num_samples)]
-    # simulated_freq = {'RT':0, 'MS':0, 'HS':0,'ES':0}
-    # for val in list_of_simulated_scores:
-    #     for sc in ratings_list:
-    #         if sc in val:
-    #             simulated_freq[sc] +=1
-    
-
-    # simulated_freq_density = {sc:simulated_freq[sc]/num_samples  for sc in ratings_list}
-
-    # https://en.wikipedia.org/wiki/Statistical_distance 
-    # something like statistical distance
-    # for sc in ratings_list:
-    #     difference+=abs(known_freq[sc]-simulated_freq_density[sc])
-    # difference = difference/2 
-
     simulated_freq_density = get_simulated_distribution(theta_RT, theta_MS, theta_HS,mean, sd)
 
     for r in ratings_list:
-        # difference += known_freq[r]*np.log(known_freq[r]/simulated_freq_density[r])
         difference += known_freq[r]*(np.log(known_freq[r]) - np.log(simulated_freq_density[r]))
-        # try:
-        #     difference += known_freq[r]*(np.log(known_freq[r]) - np.log(simulated_freq_density[r]))
-        # except RuntimeWarning:
-            # breakpoint()
 
     return difference
 
@@ -160,7 +138,6 @@ def prior_prediction():
 
     # data set 1 - df_OG 
     # average out damages from the same species 
-    # df_OG = df_OG.groupby(['Species','Rating'])['Damage'].mean()
     df_OG = df_OG.groupby(['Species','Rating'])[['Damage']].agg('mean').reset_index()
     print(df_OG)
     x_name = "Rating"
@@ -206,7 +183,7 @@ def prior_prediction():
                 # making sure values are ordered and there is some seperation between thresholds
                 thresholds_ordered = True
 
-        # mean and sd should probably from an inverse gamma 
+            # mean and sd should probably from an inverse gamma 
             mean = np.random.normal(loc=0,scale=2)
             sd = np.random.uniform(0,10)
         
@@ -281,7 +258,6 @@ def ABC(num_samples, threshold_known,threshold_freq):
 
     # data set 1 - df_OG 
     # average out damages from the same species 
-    # df_OG = df_OG.groupby(['Species','Rating'])['Damage'].mean()
     df_OG = df_OG.groupby(['Species','Rating'])[['Damage']].agg('mean').reset_index()
     print(df_OG)
     x_name = "Rating"
@@ -338,12 +314,6 @@ def ABC(num_samples, threshold_known,threshold_freq):
 
             # plus compare with score only damage - KL divergence for the susceptibility ratings
             difference_freq = difference_distribution(freq_density,total_samples,theta_RT, theta_MS, theta_HS,mean, sd)
-
-            # multiply together
-            # distance = difference_known*difference_freq
-
-            # if difference_known<1:
-            #     print(f"difference_known less than 1: {difference_known}, {difference_freq}, {distance}")
 
         theta_RT_post.append(theta_RT)
         theta_MS_post.append(theta_MS)

@@ -1,6 +1,4 @@
-# TODO: to generate csv with damages selected, so that Meryl can use them to run things.
-# Need to think whether to sample those with known damages or not.
-# probably don't sample -- consider if I had to use another data source, which may also have ratings...
+# Generates csv with myrtle rust impacts to different genera (randomly selected from posterior distribution)
 
 
 from bayes_ABC_plotting import *

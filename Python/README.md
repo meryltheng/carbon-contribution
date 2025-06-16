@@ -14,3 +14,5 @@ Run: **bayes_ABC_plotting.py** for plotting, including visual checking of conver
 Run: **bayes_ABC_generate_MR_impacts.py** to produce csvs of damage values for different plant species.
 
 Final output: see the folder **/MR_samples** for 1000 different species-impact parameter sets.
+
+Additional run: **get_averaged_genus_impacts.py** to obtain the median myrtle rust impacts to different genera (Table 1 in the paper results)

@@ -1,3 +1,5 @@
+# Plots output figures for the paper
+
 from bayes_ABC import *
 import matplotlib
 import random
@@ -203,12 +205,8 @@ def plotting(num_samples,threshold_known,threshold_freq,max_it_number = 10, fold
 
     plot_damage_normal_param_densities(mean_post,sd_post, folder_path)
 
-    return
-
     for index in [2,10]: #  [0,10,20,30,40,50]:  # range(0,10)  # 
         plot_parameter_set(index, theta_RT_post, theta_MS_post, theta_HS_post, mean_post,sd_post,folder_path )
-
-    
 
     plot_posterior_across_included_samples(theta_RT_post,"RT threshold","Posterior of $\\theta_{RT}$ threshold",[0,1], folder_path, "thresholdRT")
 
@@ -220,6 +218,7 @@ def plotting(num_samples,threshold_known,threshold_freq,max_it_number = 10, fold
 
     plot_posterior_across_included_samples(sd_post,"damage norm sd","Posterior of $\\sigma$",[0,10], folder_path, "standarddeviation")
 
+    # checking for convergence:
     plot_posterior_limited_samples(25, mean_post,"damage norm mean","Posterior of $\\mu$ - 25 random samples",[-5,2], folder_path, "mean")
     plot_posterior_limited_samples(50, mean_post,"damage norm mean","Posterior of $\\mu$ - 50 random samples",[-5,2], folder_path, "mean")
     plot_posterior_limited_samples(100, mean_post,"damage norm mean","Posterior of $\\mu$ - 100 random samples",[-5,2], folder_path, "mean")

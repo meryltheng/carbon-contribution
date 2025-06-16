@@ -1,4 +1,4 @@
-# Estimating the impact of invasive pests and diseases on ecosystem services: modelling carbon sequestration loss due to myrtle rust (Austropuccinia psidii exotic strains) in Australia
+# Estimating the impact of invasive pests and diseases on ecosystem services: modelling carbon sequestration loss due to myrtle rust (*Austropuccinia psidii* exotic strains) in Australia
 
 This repository contains the input data, code, and outputs to estimate the impact of myrtle rust on carbon sequestration in Australia. See the preprint here:
 

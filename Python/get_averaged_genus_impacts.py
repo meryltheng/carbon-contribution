@@ -1,3 +1,5 @@
+# Prints out the averaged myrtle rust impact to different genera (median and 95% intervals)
+
 import os 
 import pandas as pd
 import numpy as np
