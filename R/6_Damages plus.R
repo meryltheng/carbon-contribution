@@ -7,80 +7,7 @@ library(sf)
 library(terra)
 library(ggplot2)
 library(reshape2)
-
-# Define function to Calculate area within each MVG that is climate suitable
-calc_mvg_area_aff <- function(nvis_layer, # mvg 
-                              clim_mask){ # climate suitability mask
-  
-  # project climate layer to crs of nvis layer
-  clim_mask <- project(clim_mask, crs(nvis_layer)) 
-  
-  # crop climate layer to nvis layer to match extents
-  clim_mask <- crop(clim_mask, nvis_layer) 
-  
-  # create empty raster with the same extent and resolution as nvis layer
-  s <- rast(nrows=nrow(nvis_layer), ncols=ncol(nvis_layer),
-            xmin=terra::ext(nvis_layer)[1], xmax=terra::ext(nvis_layer)[2],
-            ymin=terra::ext(nvis_layer)[3], ymax=terra::ext(nvis_layer)[4])
-  
-  # Resample climate suitability layer to resolution as nvis layer
-  message('climate mask resampling in progress...')
-  clim_mask_resampled <- terra::resample(clim_mask, s, method="near")
-  
-  # create masked nvis layer
-  nvis_masked = nvis_layer
-  nvis_masked[clim_mask_resampled==0] = NA # set all cells that are not suitable to NA
-  
-  # calculate area in ha for each MVG that is climate suitable (takes a while)
-  message('climate suitable area calculation in progress...')
-  #area_aff_mvg <- sapply(1:32, function(x) global(nvis_masked==x, sum, na.rm=TRUE)) # num of cells per MVG = area in ha since res = 100m
-  area_aff_mvg <- freq(nvis_masked)
-  area_aff_mvg <- area_aff_mvg$count[1:32]
-  
-  return(area_aff_mvg)
-}
-
-# Define function to Compute per ha reduction proportion (%) by MVG from ABC samples
-# Output -- do we want just a single damage value AND the damage range (for ABC samples) for each climate scenario?
-calc_damages <- function(area_aff_mvg = area_aff_mvg,
-                         biomass_library = biomass_seq_mvg, # biomass sequestration data (per ha? species/genus level?)
-                         impact_dir = 'Python/MR_samples',
-                         mvg_table = mvg_info # general MVG info (name, Value_ha, Area_total)
-){
-  damage_samples <- list.files(path = impact_dir, pattern = "*.csv", full.names = T) %>%
-    map(function(x){
-      # aggregate species impacts by genus
-      impact_by_genus <- read.csv(x) %>%
-        group_by(Genus) %>%
-        summarise(Impact = mean(Damage, na.rm = T)) %>%
-        filter(!is.na(Impact)) %>%
-        rename(genus = Genus)
-      # calculate impact/reduction to biomass sequestered by MVG
-      impact_mvg <- left_join(biomass_library, impact_by_genus, by = 'genus') %>% # Assign based on genus match 
-        mutate(Impact = if_else(is.na(Impact), 0, Impact, NA)) %>% # if no info, impact = 0
-        mutate(Impact_biomass = t_biomass_seq_ha * Impact) %>% # calc absolute impact to biomass per ha (kg)
-        group_by(mvgValue) %>%
-        summarise(Impact_biomass = sum(Impact_biomass), # summed biomass loss (per ha) across all genera (kg)
-                  t_biomass_seq_ha = sum(t_biomass_seq_ha), # biomass seq per ha
-                  Impact_prop = sum(Impact_biomass) / sum(t_biomass_seq_ha) ) %>% # impact proportion by MVG
-        st_drop_geometry() %>%
-        rename(MVG = mvgValue) %>%
-        complete(MVG = 1:32, fill = list(Impact_prop = 0)) 
-      # compute damages $$
-      damage_dat <- mvg_info %>%
-        # scenario-specific
-        mutate(Area_aff = area_aff_mvg) %>%
-        # impact-sample-specific
-        mutate(Impact_perc = impact_mvg$Impact_prop,
-               C_lost_ha = impact_mvg$Impact_biomass * 0.5) |> # total C seq. lost per ha (kg)
-        mutate(C_lost_total = C_lost_ha * Area_aff, # total C seq. lost (kg)
-               Value_lost_total = Impact_perc * Value_ha * Area_aff) # damages
-      
-      
-      return(damage_dat)
-    })
-  return(damage_samples)
-}
+source("R/functions/damages.R")
 
 "----------- Load and prepare inputs and data ---------------"
 target_dir = 'Python/MR_samples' # impact samples directory
@@ -178,25 +105,116 @@ for(m in models){
 # save
 write.csv(damage_total, file = "Output/Damage_plus_plot.csv", row.names = F)
 save(damages, file = "Output/Damage_plus_data.RData")
-#write.csv(damage_total, file = "Output/Damage_plus_table.csv", row.names = F)
 
-# plot
-library(ggpubr)
-threshold_cols <- c("grey75", "grey10")
+"----------- Prepare output tables for paper ---------------"
+# load sample results if processed
+load("Output/Damage_plus_data.RData")
+damage_total <- read.csv("Output/Damage_plus_plot.csv")
 
-damage_total$Damage <- damage_total$Damage/1000000 # in $m
-damage_total$threshold_val <- as.factor(damage_total$threshold_val)
+fixed_vars <- damages[[1]][[1]][[1]][[1]][,-(7:11)] %>%
+  mutate(Value_total = Value_total/1000000, # convert to $m
+         C_ha = C_ha/1000, # convert to tons
+         C_total = C_total/1000) # convert to tons
 
-ggerrorplot(damage_total, x = "ssp_scenario", y = "Damage", color = "threshold_val", facet.by = 'model',
-         palette = threshold_cols, desc_stat = "mean_sd", 
-         size = 0.3, width = 0.5, add.params = list(size=0.1),
-         position = position_dodge(0.3)) + 
-  ggtitle('') + xlab('SSP scenario') + ylab('Damages ($m)') + 
-  theme(strip.background = element_blank(), 
-        strip.text.x = element_text(size=11))
+# summarise damages by MVG across all scenarios
+output_tables <- list()
 
-ggviolin(damage_total, x = "ssp_scenario", y = "Damage"/1000000, fill = "threshold_val", facet.by = 'model',
-         palette = threshold_cols, size = 0.3, add = "mean_sd", width = 0.5, add.params = list(size=0.1)) + 
-  ggtitle('') + xlab('SSP scenario') + ylab('Damages ($m)') + 
-  theme(strip.background = element_blank(), 
-        strip.text.x = element_text(size=11))
+for(m in models){
+  output_tables[[m]] <- list()
+  
+  for(s in ssp_scenarios){
+    output_tables[[m]][[s]] <- list()
+    
+    for(threshold in threshold_vals){
+      df_scenario = damages[[m]][[s]][[paste(threshold)]]
+      
+      out <- cbind(fixed_vars,
+                   data.frame(Area_aff = df_scenario[[1]]$Area_aff,
+                              Impact_perc = summarise_var(df = df_scenario, var_name = "Impact_perc", conversion = "*100", rounding = 1),
+                              C_lost_ha  = summarise_var(df = df_scenario, var_name = "C_lost_ha", conversion = "/1000", rounding = 2), # in tons
+                              C_lost_total = summarise_var(df = df_scenario, var_name = "C_lost_total", conversion = "/1000", rounding = 0), # in tons
+                              Value_lost_total = summarise_var(df = df_scenario, var_name = "Value_lost_total", conversion = "/1000000", rounding = 0)) # in $mil
+      )
+      
+      output_tables[[m]][[s]][[paste(threshold)]] <- out
+      rm(out, df_scenario); gc()
+    }
+  }
+}
+
+save(output_tables, file = "Output/Damage_plus_tables.RData")
+
+# outout list to excel file
+library(openxlsx)
+
+wb <- createWorkbook()
+for(m in models){
+  for(s in ssp_scenarios){
+    for(threshold in threshold_vals){
+      addWorksheet(wb, sheetName = paste0(m, "_", s, "_", threshold))
+      writeData(wb = wb, 
+                sheet = paste0(m, "_", s, "_", threshold), 
+                x = output_tables[[m]][[s]][[paste(threshold)]])
+    }
+  }
+}
+
+saveWorkbook(wb, file = "Output/Damage_plus_tables.xlsx", overwrite = TRUE)
+
+# summarise total damages by model, ssp_scenario, threshold_val
+damage_summ <- damage_total %>%
+  group_by(model, ssp_scenario, threshold_val) %>%
+  summarise(median_damage = median(Damage)/1000000,
+            lo_damage = quantile(Damage, 0.025)/1000000,
+            upp_damage = quantile(Damage, 0.975)/1000000) 
+
+total_val = sum(fixed_vars$Value_total) # in mil
+
+damage_summ_table <- damage_summ %>%
+  mutate(median_damage_perc = median_damage/total_val*100,
+         lo_damage_perc = lo_damage/total_val*100,
+         upp_damage_perc = upp_damage/total_val*100) %>%
+  mutate(total_damages = paste0(round(median_damage, 2), " [", round(lo_damage, 2), ",", round(upp_damage, 2), "]"), # in $mil
+         reduction = paste0(round(median_damage_perc, 2), " [", round(lo_damage_perc, 2), ",", round(upp_damage_perc, 2), "]")) %>% # in %
+  select(-median_damage, -lo_damage, -upp_damage, -median_damage_perc, -lo_damage_perc, -upp_damage_perc) 
+
+write.csv(damage_summ_table, file = "Output/Damage_plus_summary.csv", row.names = F)
+
+# C lost total
+C_total = sum(fixed_vars$C_total)/1000000 # in mil tons
+C_total # 1062.292M tons
+
+# append total damages to summary table
+damage_summ_table$total_C_lost <- NA
+damage_summ_table$reduction_c <- NA
+
+for(m in models){
+  for(s in ssp_scenarios){
+    for(threshold in threshold_vals){
+      df_scenario = damages[[m]][[s]][[paste(threshold)]]
+      
+      C_lost <- unlist(lapply(df_scenario, function(x) return(sum(x$C_lost_total, na.rm=T))))
+      C_lost_summ <- paste0(round(median(C_lost)/1000/1000000, 1), " [", # in mil tons
+                            round(quantile(C_lost, 0.025, na.rm=T)/1000/1000000, 1), ",", 
+                            round(quantile(C_lost, 0.975, na.rm=T)/1000/1000000, 1), "]")
+      
+      C_lost_perc <- (C_lost/1000/1000000)/C_total
+      C_lost_perc_summ <- paste0(round(median(C_lost_perc)*100, 1), " [", # in %
+                                 round(quantile(C_lost_perc, 0.025)*100, 1), ",", 
+                                 round(quantile(C_lost_perc, 0.975)*100, 1), "]")
+      
+      damage_summ_table[damage_summ_table$model==m & 
+                          damage_summ_table$ssp_scenario==s & 
+                          damage_summ_table$threshold_val==threshold, ]$total_C_lost <- C_lost_summ
+      
+      damage_summ_table[damage_summ_table$model==m & 
+                          damage_summ_table$ssp_scenario==s & 
+                          damage_summ_table$threshold_val==threshold, ]$reduction_c <- C_lost_perc_summ
+      # clear mem
+      rm(df_scenario, C_lost, C_lost_summ, C_lost_perc, C_lost_perc_summ); gc()
+    }
+  }
+}
+
+write.csv(damage_summ_table, file = "Output/Damage_plus_summary.csv", row.names = F)
+

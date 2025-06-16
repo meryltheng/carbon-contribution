@@ -14,6 +14,60 @@ all_data <- rbind(bpl_data_input,
 all_data <- all_data %>%
   filter(!is.na(genus), species != "Tree") 
 
+# summarise plot data by MVG
+data_summary <- all_data %>%
+  group_by(mvgValue, site) %>%
+  summarise(n_trees = n(),
+            sitearea_ha = first(sitearea_ha)) %>%
+  group_by(mvgValue) %>%
+  summarise(n_trees = sum(n_trees),
+            total_area_surveyed = round(sum(sitearea_ha),2),
+            n_plots = n()) %>%
+  st_drop_geometry() %>%
+  complete(mvgValue = 1:32, fill = list(n_trees = 0,
+                                        total_area_surveyed = 0,
+                                        n_plots = 0)) %>%
+  select(mvgValue, n_plots, total_area_surveyed, n_trees) %>%
+  rename(`Major Vegetation Group` = mvgValue,
+         `No. of plots` = n_plots,
+         `Total area surveyed (ha)` = total_area_surveyed,
+         `No. of trees` = n_trees)
+
+data_summary$`Major Vegetation Group` <- c("1 Rainforests and Vine Thickets", #1
+                                           "2 Eucalypt Tall Open Forests", #2
+                                           "3 Eucalypt Open Forests", #3
+                                           "4 Eucalypt Low Open Forests", #4
+                                           "5 Eucalypt Woodlands", #5 
+                                           "6 Acacia Forests and Woodlands", #6
+                                           "7 Callitris Forests and Woodlands", #7
+                                           "8 Casuarina Forests and Woodlands", #8
+                                           "9 Melaleuca Forests and Woodlands", #9
+                                           "10 Other Forests and Woodlands", #10
+                                           "11 Eucalypt Open Woodlands", #11
+                                           "12 Tropical Eucalypt Woodlands/Grasslands", #12
+                                           "13 Acacia Open Woodlands", #13
+                                           "14 Mallee Woodlands and Shrublands", #14
+                                           "15 Low Closed Forests and Tall Closed Shrublands", #15
+                                           "16 Acacia Shrublands", #16
+                                           "17 Other Shrublands", #17
+                                           "18 Heathlands", #18
+                                           "19 Tussock Grasslands", #19
+                                           "20 Hummock Grasslands", #20
+                                           "21 Other Grasslands, Herblands, Sedgelands and Rushlands", #21
+                                           "22 Chenopod Shrublands, Samphire Shrublands and Forblands", #22
+                                           "23 Mangroves", #23
+                                           "24 Inland Aquatic", #24
+                                           "25 Cleared, non-native veg., buildings", #25
+                                           "26 Unclassfied native veg.", #26
+                                           "27 Naturally bare - sand, rock, claypan, mudflat", #27
+                                           "28 Sea and estuaries", #28
+                                           "29 Regrowth, modified native vegetation", #29
+                                           "30 Unclassified forest", #30
+                                           "31 Other Open Woodlands", #31
+                                           "32 Mallee Open Woodlands and Sparse Mallee Shrublands") #32
+
+write.csv(data_summary, file = "Output/plot_data_summary.csv", row.names = FALSE)
+
 "----------- Assign record to functional plant type ---------------"
 # Quick and dirty way to assign each record to a functional plant type for AGB calculations later
 

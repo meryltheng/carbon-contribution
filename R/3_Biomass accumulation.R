@@ -166,6 +166,10 @@ x.labels = c("1 Rainforests and Vine Thickets", #1
              "31 Other Open Woodlands", #31
              "32 Mallee Open Woodlands and Sparse Mallee Shrublands") #32
 
+biomass_seq_mvg0$genus = factor(biomass_seq_mvg0$genus,
+                            levels = c("Acacia", "Angophora", "Callitris", "Casuarina", "Eucalyptus", "Syncarpia", "z_Other"),
+                            labels = c("Acacia", "Angophora", "Callitris", "Casuarina", "Eucalyptus", "Syncarpia", "Other"))
+
 # PLOT
 C_seq_plot <- ggplot(biomass_seq_mvg0, aes(x = as.factor(mvgValue), y = t_biomass_seq_ha/1000*0.5, fill = genus)) +
   geom_bar(stat = 'identity', color='black') + # position='fill' if want proportion
@@ -175,7 +179,7 @@ C_seq_plot <- ggplot(biomass_seq_mvg0, aes(x = as.factor(mvgValue), y = t_biomas
   #geom_text(aes(label = n_sites_per_mvg), vjust=0) + # how do I just have one label per mvg
   scale_x_discrete(labels = str_wrap(x.labels[unique(biomass_seq_mvg0$mvgValue)], 7)) +
   theme_bw() +
-  theme(axis.text.x=element_text(size=8),
+  theme(axis.text.x=element_text(size=8.25),
         axis.title.y = element_text(size = 12))
 
 
