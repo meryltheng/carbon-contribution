@@ -19,6 +19,8 @@ Albers  <- '+proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +e
 
 "----------- Biomass Plot Library data ---------------"
 # https://portal.tern.org.au/metadata/TERN/fc4a7249-ebb2-4ada-8e06-b552bfb297a3
+# please download the necessary data file 'biolib_treelist.csv' from the above 
+# link and place it in the Data/Biomass Plot Library/ folder (>100MB, so not included in the repo)
 
 # read and subset to 'recent' data (2013 onwards) 
 file_name = 'Data/Biomass Plot Library/biolib_treelist.csv' # tree-level data

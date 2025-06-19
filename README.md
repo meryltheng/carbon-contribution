@@ -11,7 +11,7 @@ bioRxiv 2025.05.30.657121; doi: [10.1101/2025.05.30.657121](https://doi.org/10.1
 ### Repository contents
 
 
-`Data/`: Raw data files, including: vegetation plot surveys, myrtle rust impacts, [spatial land use data (NVIS)](https://www.dcceew.gov.au/environment/environment-information-australia/national-vegetation-information-system/data-products#key51))
+`Data/`: Raw data files, including: vegetation plot surveys, myrtle rust impacts, [spatial land use data (NVIS)](https://www.dcceew.gov.au/environment/environment-information-australia/national-vegetation-information-system/data-products#key51)
 
 `Input/`: Processed data used as model inputs, including: biomass estimates, carbon sequestration values, downloaded [climate projections](https://www.longpaddock.qld.gov.au/qld-future-climate/data-info/tern-cmip6/)
 
